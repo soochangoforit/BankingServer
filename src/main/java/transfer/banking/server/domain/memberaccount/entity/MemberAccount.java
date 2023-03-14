@@ -2,6 +2,7 @@ package transfer.banking.server.domain.memberaccount.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -46,14 +47,14 @@ public class MemberAccount extends BaseTimeEntity {
    * 사용자의 고유 ID
    */
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id", nullable = false)
+  @JoinColumn(name = "member_id", nullable = false, foreignKey = @ForeignKey(name = "FK_MEMBER_ACCOUNT_MEMBER"))
   private Member member;
 
   /**
    * 사용자가 소유하고 있는 계좌의 고유 ID
    */
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "account_id", nullable = false)
+  @JoinColumn(name = "account_id", nullable = false, foreignKey = @ForeignKey(name = "FK_MEMBER_ACCOUNT_ACCOUNT"))
   private Account account;
 
   @Builder

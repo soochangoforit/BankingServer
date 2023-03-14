@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.account.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,17 +42,20 @@ public class Account extends BaseTimeEntity {
   /**
    * 계좌의 고유 번호
    */
+  @Column(nullable = false, unique = true)
   private String accountNumber;
 
   /**
    * 계좌의 이름
    */
+  @Column(nullable = false)
   private String accountName;
 
 
   /**
    * 계좌의 잔액
    */
+  @Column(nullable = false)
   private BigDecimal balance;
 
   @Builder
