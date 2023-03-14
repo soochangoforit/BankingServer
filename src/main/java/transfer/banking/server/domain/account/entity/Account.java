@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.account;
+package transfer.banking.server.domain.account.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
