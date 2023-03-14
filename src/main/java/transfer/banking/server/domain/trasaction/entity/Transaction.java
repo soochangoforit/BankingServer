@@ -3,6 +3,7 @@ package transfer.banking.server.domain.trasaction.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,14 +48,14 @@ public class Transaction extends BaseTimeEntity {
    * 거래 송신자
    */
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "sender_id", nullable = false)
+  @JoinColumn(name = "sender_id", nullable = false, foreignKey = @ForeignKey(name = "FK_TRANSACTION_SENDER"))
   private Account sender;
 
   /**
    * 거래 수신자
    */
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "receiver_id", nullable = false)
+  @JoinColumn(name = "receiver_id", nullable = false, foreignKey = @ForeignKey(name = "FK_TRANSACTION_RECEIVER"))
   private Account receiver;
 
   /**
