@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,26 +41,31 @@ public class Member extends BaseTimeEntity {
   /**
    * 사용자의 고유 아이디
    */
+  @Column(nullable = false, unique = true)
   private String username;
 
   /**
    * 사용자의 비밀번호
    */
+  @Column(nullable = false)
   private String password;
 
   /**
    * 사용자의 이메일
    */
+  @Column(nullable = false, unique = true)
   private String email;
 
   /**
    * 사용자의 이름.
    */
+  @Column(nullable = false)
   private String name;
 
   /**
    * 사용자의 전화번호
    */
+  @Column(nullable = false, unique = true)
   private String phoneNumber;
 
 
