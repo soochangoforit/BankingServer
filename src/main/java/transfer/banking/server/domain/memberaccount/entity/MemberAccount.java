@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ import transfer.banking.server.domain.member.entity.Member;
         @Parameter(name = "increment_size", value = "1")
     }
 )
+@Table(name = "member_accounts")
 public class MemberAccount extends BaseTimeEntity {
 
   /**

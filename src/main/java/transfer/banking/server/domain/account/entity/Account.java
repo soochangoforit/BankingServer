@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +28,7 @@ import transfer.banking.server.domain.common.BaseTimeEntity;
         @Parameter(name = "increment_size", value = "1")
     }
 )
+@Table(name = "accounts")
 public class Account extends BaseTimeEntity {
 
   /**
