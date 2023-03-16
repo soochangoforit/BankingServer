@@ -47,4 +47,9 @@ public class FriendShip extends BaseTimeEntity {
   @Column(name = "friend_id", nullable = false)
   private Long friendId;
 
+  public FriendShip(Long memberId, Long friendId) {
+    this.memberId = memberId;
+    this.friendId = friendId;
+  }
+
 }
