@@ -39,7 +39,7 @@ public class MemberAccountService {
    * @return 친구
    */
   @Transactional(readOnly = true)
-  public Member findFriendByNameAndAccountNumber(Bank friendAccountBank, String friendAccountNumber) {
+  public Member findFriendByBankAndAccountNumber(Bank friendAccountBank, String friendAccountNumber) {
     log.info("친구 이름과 계좌번호를 통해 친구를 조회합니다. friendAccountBank: {}, friendAccountNumber: {}", friendAccountBank,
         friendAccountNumber);
     return memberAccountRepository.findFriendByBankAndAccountNumber(friendAccountBank, friendAccountNumber)
