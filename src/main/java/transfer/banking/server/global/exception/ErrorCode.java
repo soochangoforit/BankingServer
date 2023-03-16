@@ -21,9 +21,13 @@ public enum ErrorCode {
   EMAIL_DUPLICATION(HttpStatus.BAD_REQUEST, "M002", "이미 존재하는 이메일입니다."),
   PHONE_DUPLICATION(HttpStatus.BAD_REQUEST, "M003", "이미 존재하는 전화번호입니다."),
   MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "M004", "존재하지 않는 회원입니다."),
+  FRIEND_NOT_FOUND(HttpStatus.BAD_REQUEST, "M005", "존재하지 않는 친구 및 계좌번호 입니다."),
+  ALREADY_FRIEND(HttpStatus.BAD_REQUEST, "M006", "이미 등록한 친구의 계좌입니다."),
 
   // Account (계좌 관련)
   ACCOUNT_NOT_FOUND(HttpStatus.BAD_REQUEST, "A001", "존재하지 않는 계좌입니다.");
+
+
 
   private final HttpStatus status;
   private final String code;

@@ -42,4 +42,16 @@ public class MemberService {
     return memberRepository.findById(memberId)
         .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
   }
+
+  /**
+   * API 요청자가 존재하는지 확인
+   *
+   * @param memberId 회원 ID
+   * @return 회원
+   */
+  @Transactional(readOnly = true)
+  public Member checkIfMemberExists(Long memberId) {
+    return findMemberById(memberId);
+  }
+
 }
