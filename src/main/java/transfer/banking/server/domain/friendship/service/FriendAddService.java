@@ -27,7 +27,7 @@ public class FriendAddService {
    */
   public void addFriend(FriendAddDto friendAddDto) {
     Member member = memberService.checkIfMemberExists(friendAddDto.getMemberId());
-    Member friend = memberAccountService.findFriendByNameAndAccountNumber(friendAddDto.getFriendName(), friendAddDto.getFriendAccountNumber());
+    Member friend = memberAccountService.findFriendByNameAndAccountNumber(friendAddDto.getFriendAccountBank(), friendAddDto.getFriendAccountNumber());
     friendShipService.checkAlreadyFriend(member, friend);
     friendShipService.addFriend(member, friend);
   }
