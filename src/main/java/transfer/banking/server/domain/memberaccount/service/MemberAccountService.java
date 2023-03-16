@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.entity.Account;
+import transfer.banking.server.domain.account.entity.Bank;
 import transfer.banking.server.domain.member.entity.Member;
 import transfer.banking.server.domain.member.exception.MemberNotFoundException;
 import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
@@ -33,15 +34,15 @@ public class MemberAccountService {
   /**
    * 친구 이름과 계좌번호를 통해 친구 계좌를 조회
    *
-   * @param friendName 친구 이름
+   * @param friendAccountBank 친구 계좌 은행
    * @param friendAccountNumber 친구 계좌번호
    * @return 친구
    */
   @Transactional(readOnly = true)
-  public Member findFriendByNameAndAccountNumber(String friendName, String friendAccountNumber) {
-    log.info("친구 이름과 계좌번호를 통해 친구를 조회합니다. friendName: {}, friendAccountNumber: {}", friendName,
+  public Member findFriendByNameAndAccountNumber(Bank friendAccountBank, String friendAccountNumber) {
+    log.info("친구 이름과 계좌번호를 통해 친구를 조회합니다. friendAccountBank: {}, friendAccountNumber: {}", friendAccountBank,
         friendAccountNumber);
-    return memberAccountRepository.findFriendByNameAndAccountNumber(friendName, friendAccountNumber)
+    return memberAccountRepository.findFriendByBankAndAccountNumber(friendAccountBank, friendAccountNumber)
         .orElseThrow(() -> new MemberNotFoundException(FRIEND_NOT_FOUND));
   }
 }
