@@ -2,6 +2,8 @@ package transfer.banking.server.domain.account.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -51,6 +53,13 @@ public class Account extends BaseTimeEntity {
   @Column(nullable = false)
   private String accountName;
 
+  /**
+   * 은행 유형
+   */
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Bank bank;
+
 
   /**
    * 계좌의 잔액
@@ -59,9 +68,10 @@ public class Account extends BaseTimeEntity {
   private BigDecimal balance;
 
   @Builder
-  public Account(String accountNumber, String accountName, BigDecimal balance) {
+  public Account(String accountNumber, String accountName, Bank bank, BigDecimal balance) {
     this.accountNumber = accountNumber;
     this.accountName = accountName;
+    this.bank = bank;
     this.balance = balance;
   }
 
