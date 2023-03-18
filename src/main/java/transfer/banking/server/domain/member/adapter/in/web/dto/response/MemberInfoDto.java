@@ -1,8 +1,10 @@
-package transfer.banking.server.domain.member.dto.response;
+package transfer.banking.server.domain.member.adapter.in.web.dto.response;
 
 import java.util.Objects;
+import lombok.Builder;
 import lombok.Getter;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+
 
 /**
  * 회원 정보 응답 DTO
@@ -35,6 +37,23 @@ public class MemberInfoDto {
    */
   private String phoneNumber;
 
+  @Builder
+  public MemberInfoDto(Long id, String name, String username, String email, String phoneNumber) {
+    this.id = id;
+    this.name = name;
+    this.username = username;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public MemberInfoDto(MemberInfoDtoCommand memberInfoDtoCommand) {
+    this.id = memberInfoDtoCommand.getId();
+    this.name = memberInfoDtoCommand.getName();
+    this.username = memberInfoDtoCommand.getUsername();
+    this.email = memberInfoDtoCommand.getEmail();
+    this.phoneNumber = memberInfoDtoCommand.getPhoneNumber();
+  }
+
   public MemberInfoDto(Member member) {
     this.id = member.getId();
     this.name = member.getName();
@@ -42,6 +61,8 @@ public class MemberInfoDto {
     this.email = member.getEmail();
     this.phoneNumber = member.getPhoneNumber();
   }
+
+
 
 
   @Override

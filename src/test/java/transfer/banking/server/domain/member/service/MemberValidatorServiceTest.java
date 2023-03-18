@@ -9,9 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import transfer.banking.server.domain.member.dto.request.SignUpDto;
-import transfer.banking.server.domain.member.exception.DuplicateMemberException;
-import transfer.banking.server.domain.member.repository.MemberRepository;
+import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
+import transfer.banking.server.domain.member.application.service.MemberValidatorService;
+import transfer.banking.server.domain.member.application.exception.DuplicateMemberException;
+import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class MemberValidatorServiceTest {

@@ -1,10 +1,10 @@
-package transfer.banking.server.domain.member.repository;
+package transfer.banking.server.domain.member.adapter.out.persistence.repository.jpa;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
 
   boolean existsByUsername(String username);
