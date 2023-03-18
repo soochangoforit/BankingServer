@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.member.adapter.out.persistence.repository.jpa;
+package transfer.banking.server.domain.member.adapter.out.persistence.repository;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

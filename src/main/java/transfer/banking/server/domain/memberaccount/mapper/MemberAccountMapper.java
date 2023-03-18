@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import transfer.banking.server.domain.account.application.mapper.AccountMapper;
 import transfer.banking.server.domain.account.domain.AccountDomain;
+import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 import transfer.banking.server.domain.member.application.mapper.MemberMapper;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
@@ -22,4 +23,10 @@ public class MemberAccountMapper {
         .build();
   }
 
+  public MemberAccountDomain toDomain(MemberAccount memberAccountEntity) {
+    return MemberAccountDomain.builder()
+        .member(memberMapper.toDomain(memberAccountEntity.getMember()))
+        .account(accountMapper.toDomain(memberAccountEntity.getAccount()))
+        .build();
+  }
 }

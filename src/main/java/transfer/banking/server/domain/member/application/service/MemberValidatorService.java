@@ -6,7 +6,6 @@ import static transfer.banking.server.global.exception.ErrorCode.USERNAME_DUPLIC
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepositoryPort;
 import transfer.banking.server.domain.member.application.exception.DuplicateMemberException;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 

@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.friendship.dto.request;
+package transfer.banking.server.domain.friendship.adapter.in.web.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
