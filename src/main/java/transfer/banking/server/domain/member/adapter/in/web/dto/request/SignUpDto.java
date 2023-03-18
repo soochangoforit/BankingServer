@@ -37,22 +37,7 @@ public class SignUpDto {
    */
   private String phoneNumber;
 
-  public Member toEntity() {
-    return Member.builder()
-        .name(name)
-        .username(username)
-        .password(password)
-        .email(email)
-        .phoneNumber(phoneNumber)
-        .build();
-  }
 
-  @Builder
-  public SignUpDto(String name, String username, String password, String email, String phoneNumber) {
-    this.name = name;
-    this.username = username;
-    this.password = password;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-  }
+
+
 }

@@ -7,24 +7,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDtoCommand;
+import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDtoCommand;
 import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
 import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDto;
+import transfer.banking.server.domain.member.application.port.in.MemberSignUpUseCase;
 import transfer.banking.server.domain.member.application.service.MemberSignUpService;
 import transfer.banking.server.global.response.DataResponse;
 
+/**
+ * 회원 컨트롤러
+ *
+ * HTTP 요청을 자바 객체로 매핑
+ * 권한 검사
+ * 입력 유효성 검증
+ * 입력을 유스케이스의 입력 모델(Command) 로 매핑
+ * 유스케이스 호출
+ * 유스케이스의 출력을 HTTP Dto 로 매핑
+ * HTTP 응답을 반환
+ *
+ * 필드값으로 행동하길 원하는 interface 인 유스케이스를 주입 받는다.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/members")
 public class MemberController {
 
-  private final MemberSignUpService memberSignUpService;
+  private final MemberSignUpUseCase memberSignUpUseCase;
 
   /**
    * 회원가입
    */
   @PostMapping("/sign-up")
   public ResponseEntity<DataResponse<MemberInfoDto>> signUp(@RequestBody SignUpDto signUpDto) {
-    MemberInfoDto memberInfoDto = memberSignUpService.signUp(signUpDto);
+    SignUpDtoCommand reqCommand = new SignUpDtoCommand(signUpDto);
+
+    MemberInfoDtoCommand resCommand = memberSignUpUseCase.signUp(reqCommand);
+
+    MemberInfoDto memberInfoDto = new MemberInfoDto(resCommand);
     return new ResponseEntity<>(DataResponse.of(HttpStatus.OK, "회원가입 성공", memberInfoDto), HttpStatus.OK);
   }
 

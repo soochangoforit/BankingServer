@@ -1,57 +1,41 @@
 package transfer.banking.server.domain.member.application.service;
 
-import static transfer.banking.server.global.exception.ErrorCode.MEMBER_NOT_FOUND;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
-import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
-import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepository;
+import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepositoryPort;
+import transfer.banking.server.domain.member.domain.MemberDomain;
 
 /**
- * 멤버 순수 서비스
+ * 멤버 순수 서비스, 필드 값으로 Repository 접근을 위한 Port Interface 를 사용한다.
+ *
+ * 트랜잭션을 아직 시작하지 않는다.
+ * DB 접근을 위한 Adapter Class 에서 트랜잭션을 시작한다.
  */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MemberService {
 
-  private final MemberRepository memberRepository;
+  private final MemberRepositoryPort memberRepository;
 
-  /**
-   * 회원가입
-   *
-   * @return 회원
-   */
-  @Transactional
-  public Member signUp(Member member) {
-    return memberRepository.save(member);
+
+  public MemberDomain signUp(MemberDomain domain) {
+    return memberRepository.save(domain);
   }
 
-  /**
-   * 회원 조회
-   *
-   * @param memberId 회원 ID
-   * @return 회원
-   */
-  @Transactional(readOnly = true)
-  public Member findMemberById(Long memberId) {
-    log.info("memberId 를 통해서 멤버를 조회합니다. memberId: {}", memberId);
-    return memberRepository.findById(memberId)
-        .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+  public boolean existsByUsername(String username) {
+    return memberRepository.existsByUsername(username);
   }
 
-  /**
-   * API 요청자가 존재하는지 확인
-   *
-   * @param memberId 회원 ID
-   * @return 회원
-   */
-  @Transactional(readOnly = true)
-  public Member checkIfMemberExists(Long memberId) {
-    return findMemberById(memberId);
+  public boolean existsByEmail(String email) {
+    return memberRepository.existsByEmail(email);
   }
+
+  public boolean existsByPhoneNumber(String phoneNumber) {
+    return memberRepository.existsByPhoneNumber(phoneNumber);
+  }
+
+
 
 }
