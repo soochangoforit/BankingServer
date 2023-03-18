@@ -2,7 +2,7 @@ package transfer.banking.server.domain.friendship.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import transfer.banking.server.domain.account.entity.Bank;
+import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 
 /**
  * 친구 추가 요청 DTO

@@ -1,9 +1,12 @@
 package transfer.banking.server.domain.member.application.service;
 
+import static transfer.banking.server.global.exception.ErrorCode.MEMBER_NOT_FOUND;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepositoryPort;
+import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
 /**
@@ -37,5 +40,8 @@ public class MemberService {
   }
 
 
-
+  public MemberDomain findMemberById(Long memberId) {
+    return memberRepository.findById(memberId)
+        .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+  }
 }

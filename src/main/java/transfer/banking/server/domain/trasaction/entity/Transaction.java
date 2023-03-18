@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import transfer.banking.server.domain.account.entity.Account;
+import transfer.banking.server.domain.account.adapter.out.persistence.entity.Account;
 import transfer.banking.server.domain.common.BaseTimeEntity;
 
 /**

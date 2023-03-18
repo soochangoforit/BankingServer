@@ -6,11 +6,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import transfer.banking.server.domain.account.entity.Account;
-import transfer.banking.server.domain.account.entity.Bank;
+import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
+import transfer.banking.server.domain.account.domain.AccountDomain;
 import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
+import transfer.banking.server.domain.member.domain.MemberDomain;
 import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
+import transfer.banking.server.domain.memberaccount.mapper.MemberAccountMapper;
 import transfer.banking.server.domain.memberaccount.repository.MemberAccountRepository;
 
 /**
@@ -22,12 +24,13 @@ import transfer.banking.server.domain.memberaccount.repository.MemberAccountRepo
 public class MemberAccountService {
 
   private final MemberAccountRepository memberAccountRepository;
+  private final MemberAccountMapper memberAccountMapper;
 
   @Transactional
-  public void saveMemberAccount(Member member, Account account) {
-    log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", member.getName(),
-        account.getAccountNumber());
-    MemberAccount memberAccount = new MemberAccount(member, account);
+  public void saveMemberAccount(MemberDomain memberDomain, AccountDomain accountDomain) {
+    log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", memberDomain.getName(),
+        accountDomain.getAccountNumber());
+    MemberAccount memberAccount = memberAccountMapper.toEntity(memberDomain, accountDomain);
     memberAccountRepository.save(memberAccount);
   }
 

@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.adapter.out.persistence.repository;
 
+import java.util.Optional;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
 
@@ -19,4 +20,6 @@ public interface MemberRepositoryPort {
   boolean existsByEmail(String email);
 
   boolean existsByPhoneNumber(String phoneNumber);
+
+  Optional<MemberDomain> findById(Long memberId);
 }
