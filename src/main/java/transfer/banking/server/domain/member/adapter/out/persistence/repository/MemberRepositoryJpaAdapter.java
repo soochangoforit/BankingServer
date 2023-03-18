@@ -1,12 +1,13 @@
-package transfer.banking.server.domain.member.adapter.out.persistence.repository.jpa;
+package transfer.banking.server.domain.member.adapter.out.persistence.repository;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
-import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepositoryPort;
+import transfer.banking.server.domain.member.application.port.out.MemberRepositoryPort;
 import transfer.banking.server.domain.member.application.mapper.MemberMapper;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
@@ -21,7 +22,7 @@ import transfer.banking.server.domain.member.domain.MemberDomain;
  * 응답 값으로 Domain 을 사용한다.
  * 내부적으로 Jpa, Redis, MongoDB 등 성격에 따른 Entity 혹은 primitive type 으로 변환하여 영속화 하거나 조회한다.
  */
-@Service
+@Repository
 @RequiredArgsConstructor
 @Slf4j
 public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {

@@ -1,14 +1,14 @@
 package transfer.banking.server.domain.account.adapter.out.persistence.repository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import transfer.banking.server.domain.account.adapter.out.persistence.AccountRepositoryPort;
+import transfer.banking.server.domain.account.application.port.out.AccountRepositoryPort;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Account;
 import transfer.banking.server.domain.account.application.mapper.AccountMapper;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 
-@Service
+@Repository
 @RequiredArgsConstructor
 public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
 

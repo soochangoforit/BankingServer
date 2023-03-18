@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.member.adapter.out.persistence.repository;
+package transfer.banking.server.domain.member.application.port.out;
 
 import java.util.Optional;
 import transfer.banking.server.domain.member.domain.MemberDomain;

@@ -12,4 +12,7 @@ public interface MemberAccountRepository extends JpaRepository<MemberAccount, Lo
 
   @Query("select ma.member from MemberAccount ma join ma.member m join ma.account ac where ac.bank = :bank and ac.accountNumber = :friendAccountNumber")
   Optional<Member> findFriendByBankAndAccountNumber(@Param("bank") Bank bank, @Param("friendAccountNumber") String friendAccountNumber);
+
+  @Query("select ma from MemberAccount ma join fetch ma.member m join fetch ma.account ac where ac.bank = :bank and ac.accountNumber = :accountNumber")
+  Optional<MemberAccount> findFriendAccountByNumAndBank(@Param("accountNumber") String accountNumber, @Param("bank") Bank bank);
 }

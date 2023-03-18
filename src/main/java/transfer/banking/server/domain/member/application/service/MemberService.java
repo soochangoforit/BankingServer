@@ -5,7 +5,7 @@ import static transfer.banking.server.global.exception.ErrorCode.MEMBER_NOT_FOUN
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepositoryPort;
+import transfer.banking.server.domain.member.application.port.out.MemberRepositoryPort;
 import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
