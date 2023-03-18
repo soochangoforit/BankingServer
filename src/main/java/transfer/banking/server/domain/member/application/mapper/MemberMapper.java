@@ -1,8 +1,7 @@
 package transfer.banking.server.domain.member.application.mapper;
 
+import java.util.Optional;
 import org.springframework.stereotype.Component;
-import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDtoCommand;
-import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDtoCommand;
 import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
@@ -18,6 +17,7 @@ public class MemberMapper {
    */
   public Member toJpaEntity(MemberDomain command) {
     return Member.builder()
+        .id(command.getId())
         .name(command.getName())
         .username(command.getUsername())
         .email(command.getEmail())
@@ -38,6 +38,10 @@ public class MemberMapper {
         .password(memberJpaEntity.getPassword())
         .phoneNumber(memberJpaEntity.getPhoneNumber())
         .build();
+  }
+
+  public Optional<MemberDomain> toOptionalDomain(Optional<Member> optionalMember) {
+    return optionalMember.map(this::toDomain);
   }
 
 }

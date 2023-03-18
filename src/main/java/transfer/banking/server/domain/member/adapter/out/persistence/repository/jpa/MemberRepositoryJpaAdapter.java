@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.adapter.out.persistence.repository.jpa;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,13 @@ public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {
   @Transactional(readOnly = true)
   public boolean existsByPhoneNumber(String phoneNumber) {
     return memberJpaRepository.existsByPhoneNumber(phoneNumber);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<MemberDomain> findById(Long memberId) {
+    Optional<Member> optionalMember = memberJpaRepository.findById(memberId);
+    return memberMapper.toOptionalDomain(optionalMember);
   }
 
 

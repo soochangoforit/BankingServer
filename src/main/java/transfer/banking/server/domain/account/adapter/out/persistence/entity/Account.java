@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.account.entity;
+package transfer.banking.server.domain.account.adapter.out.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -68,7 +68,8 @@ public class Account extends BaseTimeEntity {
   private BigDecimal balance;
 
   @Builder
-  public Account(String accountNumber, String accountName, Bank bank, BigDecimal balance) {
+  public Account(Long id, String accountNumber, String accountName, Bank bank, BigDecimal balance) {
+    this.id = id;
     this.accountNumber = accountNumber;
     this.accountName = accountName;
     this.bank = bank;

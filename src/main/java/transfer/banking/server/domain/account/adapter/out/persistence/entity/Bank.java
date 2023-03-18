@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.account.entity;
+package transfer.banking.server.domain.account.adapter.out.persistence.entity;
 
 import lombok.Getter;
 

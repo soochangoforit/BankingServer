@@ -1,14 +1,10 @@
-package transfer.banking.server.domain.account.service;
+package transfer.banking.server.domain.account.application.service;
 
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
-/**
- * 계좌번호 생성 복합 서비스
- */
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -16,16 +12,9 @@ public class AccountNumberGenerator {
 
   private final AccountService accountService;
 
-  /**
-   * 랜덤 계좌번호 생성
-   *
-   * @return 계좌번호
-   */
   public String generateAccountNumber() {
-    // generate 10 digit random number
     Random rnd = new Random();
     String accountNumber = String.valueOf(rnd.nextInt(1000000000));
-
     boolean hasNumber = accountService.checkIfAccountNumberExists(accountNumber);
 
     if (hasNumber) {
@@ -34,4 +23,5 @@ public class AccountNumberGenerator {
     }
     return accountNumber;
   }
+
 }
