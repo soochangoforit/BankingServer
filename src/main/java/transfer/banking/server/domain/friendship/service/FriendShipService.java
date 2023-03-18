@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.friendship.entity.FriendShip;
 import transfer.banking.server.domain.friendship.exception.AlreadyFriendException;
 import transfer.banking.server.domain.friendship.repository.FriendShipRepository;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 /**
  * 친구 관계 순수 서비스

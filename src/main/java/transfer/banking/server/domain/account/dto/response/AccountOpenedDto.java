@@ -3,7 +3,7 @@ package transfer.banking.server.domain.account.dto.response;
 import java.math.BigDecimal;
 import lombok.Getter;
 import transfer.banking.server.domain.account.entity.Account;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 /**
  * 계좌 개설 응답 DTO

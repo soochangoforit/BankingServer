@@ -1,10 +1,10 @@
-package transfer.banking.server.domain.member.service;
+package transfer.banking.server.domain.member.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import transfer.banking.server.domain.member.dto.request.SignUpDto;
-import transfer.banking.server.domain.member.dto.response.MemberInfoDto;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
+import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDto;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 @Service
 @RequiredArgsConstructor

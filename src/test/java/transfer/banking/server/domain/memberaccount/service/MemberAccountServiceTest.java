@@ -19,8 +19,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import transfer.banking.server.domain.account.entity.Account;
 import transfer.banking.server.domain.account.entity.Bank;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.exception.MemberNotFoundException;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
 import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
 import transfer.banking.server.domain.memberaccount.repository.MemberAccountRepository;
 

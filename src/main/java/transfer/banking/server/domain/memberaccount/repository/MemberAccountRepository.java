@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import transfer.banking.server.domain.account.entity.Bank;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
 
 public interface MemberAccountRepository extends JpaRepository<MemberAccount, Long> {

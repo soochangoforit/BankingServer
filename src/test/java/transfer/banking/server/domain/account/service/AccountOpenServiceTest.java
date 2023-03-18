@@ -19,8 +19,8 @@ import transfer.banking.server.domain.account.dto.request.AccountOpenDto;
 import transfer.banking.server.domain.account.dto.response.AccountOpenedDto;
 import transfer.banking.server.domain.account.entity.Account;
 import transfer.banking.server.domain.account.entity.Bank;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.service.MemberService;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.application.service.MemberService;
 
 @ExtendWith(MockitoExtension.class)
 class AccountOpenServiceTest {

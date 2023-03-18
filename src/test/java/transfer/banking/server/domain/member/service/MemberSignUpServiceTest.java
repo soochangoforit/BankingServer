@@ -14,10 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import transfer.banking.server.domain.member.dto.request.SignUpDto;
-import transfer.banking.server.domain.member.dto.response.MemberInfoDto;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.exception.DuplicateMemberException;
+import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
+import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDto;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.application.service.MemberService;
+import transfer.banking.server.domain.member.application.service.MemberSignUpService;
+import transfer.banking.server.domain.member.application.service.MemberValidatorService;
+import transfer.banking.server.domain.member.application.exception.DuplicateMemberException;
 import transfer.banking.server.global.exception.ErrorCode;
 
 

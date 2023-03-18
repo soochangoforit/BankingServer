@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import transfer.banking.server.domain.account.entity.Account;
 import transfer.banking.server.domain.account.entity.Bank;
-import transfer.banking.server.domain.member.entity.Member;
 
 /**
  * 계좌 개설 요청 DTO

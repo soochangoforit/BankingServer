@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import transfer.banking.server.domain.friendship.dto.request.FriendAddDto;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.service.MemberService;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.application.service.MemberService;
 import transfer.banking.server.domain.memberaccount.service.MemberAccountService;
 
 /**

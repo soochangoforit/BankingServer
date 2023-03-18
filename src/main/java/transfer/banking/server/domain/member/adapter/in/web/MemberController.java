@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.member.controller;
+package transfer.banking.server.domain.member.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import transfer.banking.server.domain.member.dto.request.SignUpDto;
-import transfer.banking.server.domain.member.dto.response.MemberInfoDto;
-import transfer.banking.server.domain.member.service.MemberSignUpService;
+import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
+import transfer.banking.server.domain.member.adapter.in.web.dto.response.MemberInfoDto;
+import transfer.banking.server.domain.member.application.service.MemberSignUpService;
 import transfer.banking.server.global.response.DataResponse;
 
 @RestController

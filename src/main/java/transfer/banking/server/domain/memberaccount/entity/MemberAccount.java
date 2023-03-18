@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import transfer.banking.server.domain.account.entity.Account;
 import transfer.banking.server.domain.common.BaseTimeEntity;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 /**
  * 사용자의 계좌 정보를 담는 Entity

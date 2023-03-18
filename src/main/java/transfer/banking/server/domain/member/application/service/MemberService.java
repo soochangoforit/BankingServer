@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.member.service;
+package transfer.banking.server.domain.member.application.service;
 
 import static transfer.banking.server.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import transfer.banking.server.domain.member.exception.MemberNotFoundException;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.repository.MemberRepository;
+import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepository;
 
 /**
  * 멤버 순수 서비스

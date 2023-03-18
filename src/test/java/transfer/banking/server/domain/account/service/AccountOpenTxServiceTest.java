@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import transfer.banking.server.domain.account.entity.Account;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.memberaccount.service.MemberAccountService;
 
 @ExtendWith(MockitoExtension.class)

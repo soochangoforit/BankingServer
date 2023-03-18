@@ -1,9 +1,9 @@
-package transfer.banking.server.domain.member.dto.request;
+package transfer.banking.server.domain.member.adapter.in.web.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import transfer.banking.server.domain.member.entity.Member;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 /**
  * 회원가입 요청 DTO

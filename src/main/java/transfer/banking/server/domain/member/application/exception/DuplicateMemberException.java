@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.member.exception;
+package transfer.banking.server.domain.member.application.exception;
 
 import transfer.banking.server.global.exception.BusinessException;
 import transfer.banking.server.global.exception.ErrorCode;

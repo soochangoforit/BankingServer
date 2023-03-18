@@ -13,9 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import transfer.banking.server.domain.member.entity.Member;
-import transfer.banking.server.domain.member.exception.MemberNotFoundException;
-import transfer.banking.server.domain.member.repository.MemberRepository;
+import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
+import transfer.banking.server.domain.member.application.service.MemberService;
+import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
+import transfer.banking.server.domain.member.adapter.out.persistence.repository.MemberRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class MemberServiceTest {
