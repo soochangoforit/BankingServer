@@ -19,6 +19,8 @@ import transfer.banking.server.domain.member.domain.MemberDomain;
  * 응답 값으로 Domain 을 사용한다.
  * 요청값으로 Domain 객체를 받더라도
  * 내부적으로 Jpa, Redis, MongoDB 등 성격에 따른 {Entity 혹은 primitive type 으로 변환}하여 영속화 하거나 조회한다.
+ * optional 를 포함한 domain 객체를 그대로 반환한다.
+ * optional 에 대한 예외 처리는 상위 순수 서비스에서 한다.
  */
 @Repository
 @RequiredArgsConstructor

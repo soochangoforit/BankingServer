@@ -8,6 +8,8 @@ import transfer.banking.server.domain.member.domain.MemberDomain;
  * 순수 서비스와 외부 DB 를 연결하는 Repository 인터페이스 (어댑터 클래스)
  * 인터페이스화 함으로써 순수 서비스와 외부 DB 접근을 위한 Adapter 를 분리할 수 있다.
  * Data JPA 환경으로 변경할수도 있고, 다른 DB 환경으로 변경할 수도 있다.
+ * 입력 값으로 Domain 객체를 주입 받거나, Primitive Type 을 사용한다.
+ * 응답 값으로 Domain 객체를 사용 하거나, Primitive Type 을 사용한다.
  * [의문점]
  * 과연 Port interface 도 여러개를 만들어서 관리를 해야할까?
  * 다른 DB 접근법으로 교체된다고 하더라도, 결국 그 DB에서 데이터를 가져오고 가공하려면

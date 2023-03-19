@@ -24,6 +24,12 @@ public class MemberAccountService {
   private final MemberAccountRepositoryPort memberAccountRepository;
 
 
+  /**
+   * 멤버 계좌를 저장
+   *
+   * @param memberDomain 계좌를 개설하고자 하는 멤버 도메인
+   * @param accountDomain 개설된 계좌 도메인
+   */
   public void saveMemberAccount(MemberDomain memberDomain, AccountDomain accountDomain) {
     log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", memberDomain.getName(),
         accountDomain.getAccountNumber());

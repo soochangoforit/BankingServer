@@ -8,6 +8,9 @@ import transfer.banking.server.domain.account.adapter.out.persistence.entity.Acc
 import transfer.banking.server.domain.account.application.mapper.AccountMapper;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 
+/**
+ * 계좌 Repository Jpa Adapter Class
+ */
 @Repository
 @RequiredArgsConstructor
 public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
@@ -22,9 +25,10 @@ public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
   }
 
   @Override
+  @Transactional
   public AccountDomain save(AccountDomain accountDomain) {
-    Account account = accountMapper.toEntity(accountDomain);
-    Account saved = accountRepository.save(account);
-    return accountMapper.toDomain(saved);
+    Account account = accountMapper.toJpaEntity(accountDomain);
+    accountRepository.save(account);
+    return accountMapper.toDomain(account);
   }
 }

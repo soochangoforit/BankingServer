@@ -14,6 +14,9 @@ import transfer.banking.server.domain.memberaccount.entity.MemberAccount;
 import transfer.banking.server.domain.memberaccount.mapper.MemberAccountMapper;
 import transfer.banking.server.domain.memberaccount.repository.MemberAccountRepository;
 
+/**
+ * 멤버 계좌 Repository Jpa Adapter
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,7 +28,7 @@ public class MemberAccountRepositoryJpaAdapter implements MemberAccountRepositor
   @Override
   @Transactional
   public void save(MemberDomain memberDomain, AccountDomain accountDomain) {
-    MemberAccount memberAccount = memberAccountMapper.toEntity(memberDomain, accountDomain);
+    MemberAccount memberAccount = memberAccountMapper.toJpaEntity(memberDomain, accountDomain);
     memberAccountRepository.save(memberAccount);
   }
 

@@ -26,4 +26,16 @@ public class AccountOpenDto {
    */
   private String accountName;
 
+  /**
+   * AccountOpenDto 를 AccountOpenDtoCommand 로 변환한다.
+   *
+   * @return AccountOpenDtoCommand , 유스케이스 계층에서 사용한다.
+   */
+  public AccountOpenDtoCommand toCommand() {
+    return AccountOpenDtoCommand.builder()
+        .memberId(this.memberId)
+        .bank(this.bank)
+        .accountName(this.accountName)
+        .build();
+  }
 }
