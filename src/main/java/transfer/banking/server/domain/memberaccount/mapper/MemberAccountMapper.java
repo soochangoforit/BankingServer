@@ -16,10 +16,10 @@ public class MemberAccountMapper {
   private final MemberMapper memberMapper;
   private final AccountMapper accountMapper;
 
-  public MemberAccount toEntity(MemberDomain memberDomain, AccountDomain accountDomain) {
+  public MemberAccount toJpaEntity(MemberDomain memberDomain, AccountDomain accountDomain) {
     return MemberAccount.builder()
         .member(memberMapper.toJpaEntity(memberDomain))
-        .account(accountMapper.toEntity(accountDomain))
+        .account(accountMapper.toJpaEntity(accountDomain))
         .build();
   }
 

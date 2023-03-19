@@ -1,6 +1,5 @@
 package transfer.banking.server.domain.member.application.mapper;
 
-import java.util.Optional;
 import org.springframework.stereotype.Component;
 import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.member.domain.MemberDomain;
@@ -40,8 +39,5 @@ public class MemberMapper {
         .build();
   }
 
-  public Optional<MemberDomain> toOptionalDomain(Optional<Member> optionalMember) {
-    return optionalMember.map(this::toDomain);
-  }
 
 }

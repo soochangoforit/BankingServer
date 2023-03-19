@@ -9,6 +9,9 @@ import transfer.banking.server.domain.friendship.application.port.in.FriendSearc
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 import transfer.banking.server.domain.memberaccount.service.MemberAccountService;
 
+/**
+ * 친구 계좌 조회 복합 서비스
+ */
 @Service
 @RequiredArgsConstructor
 public class FriendSearchService implements FriendSearchUseCase {
@@ -16,10 +19,13 @@ public class FriendSearchService implements FriendSearchUseCase {
   private final FriendShipService friendShipService;
   private final MemberAccountService memberAccountService;
 
+  /**
+   * 내가 등록한 친구 계좌 조회
+   */
   @Override
   public List<MyFriendsAccountCommand> searchMyFriends(MemberIdCommand command) {
     Long memberId = command.getMemberId();
-    List<String> myFriendsAccountNumbers = friendShipService.searchMyFriends(memberId);
+    List<String> myFriendsAccountNumbers = friendShipService.searchMyFriendsAccountNum(memberId);
     List<MemberAccountDomain> domains = memberAccountService.searchFriendsAccount(
         myFriendsAccountNumbers);
     return MyFriendsAccountCommand.toCommands(domains);

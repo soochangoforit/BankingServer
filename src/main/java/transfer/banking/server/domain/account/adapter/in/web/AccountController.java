@@ -26,17 +26,19 @@ public class AccountController {
 
   /**
    * 계좌 개설
+   *
+   * @param accountOpenDto 개설하고자 하는 계좌 정보
+   * @return 계좌 개설 결과
    */
   @PostMapping()
   public ResponseEntity<DataResponse<AccountOpenedDto>> openAccount(
       @RequestBody AccountOpenDto accountOpenDto) {
 
-    AccountOpenDtoCommand command = new AccountOpenDtoCommand(accountOpenDto);
+    AccountOpenDtoCommand accountOpenDtoCommand = accountOpenDto.toCommand();
 
-    AccountOpenedDtoCommand accountOpenedDtoCmd = accountOpenUseCase.openAccount(command);
+    AccountOpenedDtoCommand accountOpenedDtoCmd = accountOpenUseCase.openAccount(accountOpenDtoCommand);
 
     AccountOpenedDto accountOpenedDto = new AccountOpenedDto(accountOpenedDtoCmd);
-
 
     return new ResponseEntity<>(DataResponse.of(HttpStatus.CREATED, "계좌 개설 성공", accountOpenedDto),
         HttpStatus.CREATED);

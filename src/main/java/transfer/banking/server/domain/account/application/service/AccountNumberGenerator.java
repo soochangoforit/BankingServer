@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * 계좌 번호 생성 서비스
+ */
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -12,6 +15,11 @@ public class AccountNumberGenerator {
 
   private final AccountService accountService;
 
+  /**
+   * 계좌 번호 생성
+   *
+   * @return 계좌 번호
+   */
   public String generateAccountNumber() {
     Random rnd = new Random();
     String accountNumber = String.valueOf(rnd.nextInt(1000000000));
