@@ -24,7 +24,7 @@ public class FriendAddService implements FriendAddUseCase {
 
     // 친구 관계가 이미 존재하는지 확인한다.
     friendShipService.checkIfFriendShipExists(command.getMemberId(),
-        friendAccountDomain.getMember().getId());
+        friendAccountDomain);
 
     // 친구 관계가 아니라면, 친구 관계를 추가한다.
     friendShipService.saveFriendShip(command.getMemberId(),

@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.memberaccount.port.out;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +34,12 @@ public class MemberAccountRepositoryJpaAdapter implements MemberAccountRepositor
       Bank friendAccountBank) {
     return memberAccountRepository.findFriendAccountByNumAndBank(friendAccountNumber, friendAccountBank)
         .map(memberAccountMapper::toDomain);
+  }
+
+  @Override
+  public List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers) {
+    return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers).stream()
+        .map(memberAccountMapper::toDomain)
+        .toList();
   }
 }

@@ -2,6 +2,7 @@ package transfer.banking.server.domain.memberaccount.service;
 
 import static transfer.banking.server.global.exception.ErrorCode.FRIEND_NOT_FOUND;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,10 @@ public class MemberAccountService {
       Bank friendAccountBank) {
     return memberAccountRepository.findFriendAccountByNumAndBank(friendAccountNumber, friendAccountBank)
         .orElseThrow(() -> new MemberNotFoundException(FRIEND_NOT_FOUND));
+  }
+
+  public List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers) {
+    return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers);
   }
 //
 //  /**
