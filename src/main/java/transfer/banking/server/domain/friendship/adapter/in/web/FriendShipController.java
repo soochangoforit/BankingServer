@@ -20,6 +20,9 @@ import transfer.banking.server.domain.friendship.application.port.in.FriendSearc
 import transfer.banking.server.global.response.DataResponse;
 import transfer.banking.server.global.response.MessageResponse;
 
+/**
+ * 친구 계좌 관련 Controller
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/friends")
@@ -28,10 +31,16 @@ public class FriendShipController {
   private final FriendAddUseCase friendAddUseCase;
   private final FriendSearchUseCase friendSearchUseCase;
 
+  /**
+   * 친구 추가
+   *
+   * @param friendAddDto 친구 추가 정보
+   * @return 친구 추가 결과 메시지
+   */
   @PostMapping()
   public ResponseEntity<MessageResponse> addFriend(@RequestBody FriendAddDto friendAddDto) {
-    FriendAddDtoCommand command = new FriendAddDtoCommand(friendAddDto);
-    friendAddUseCase.addFriend(command);
+    FriendAddDtoCommand friendAddDtoCommand = friendAddDto.toCommand();
+    friendAddUseCase.addFriend(friendAddDtoCommand);
     return new ResponseEntity<>(MessageResponse.of(HttpStatus.OK, "친구 추가 성공"), HttpStatus.OK);
   }
 

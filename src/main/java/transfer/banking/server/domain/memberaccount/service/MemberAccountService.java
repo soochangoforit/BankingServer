@@ -15,6 +15,8 @@ import transfer.banking.server.domain.memberaccount.port.out.MemberAccountReposi
 
 /**
  * 멤버 계좌 순수 서비스
+ * 입력 값으로 Domain 객체 혹은 Primitive Type 을 받아서 처리한다.
+ * 응답 값으로 Domain 객체 혹은 Primitive Type 을 반환한다.
  */
 @Service
 @RequiredArgsConstructor
@@ -36,6 +38,13 @@ public class MemberAccountService {
     memberAccountRepository.save(memberDomain, accountDomain);
   }
 
+  /**
+   * 친구 MemberAccount 찾기 위해 친구 계좌번호와 은행을 통해 친구 계좌를 조회
+   *
+   * @param friendAccountNumber 추가하고자 하는 친구 계좌번호
+   * @param friendAccountBank 추가하고자 하는 친구 계좌 은행
+   * @return 친구 계좌 도메인
+   */
   public MemberAccountDomain findFriendAccountByNumAndBank(String friendAccountNumber,
       Bank friendAccountBank) {
     return memberAccountRepository.findFriendAccountByNumAndBank(friendAccountNumber, friendAccountBank)

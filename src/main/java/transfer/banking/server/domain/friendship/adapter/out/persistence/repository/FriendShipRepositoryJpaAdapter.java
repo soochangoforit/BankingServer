@@ -9,7 +9,12 @@ import transfer.banking.server.domain.friendship.application.mapper.FriendShipMa
 import transfer.banking.server.domain.friendship.application.port.out.FriendShipRepositoryPort;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 
-
+/**
+ * 친구 관계 Repository Jpa Adapter
+ * 입력 값으로 도메인 객체 혹은 Primitive Type 을 받아서 처리한다.
+ * 응답 값으로 도메인 객체 혹은 Primitive Type 을 반환한다.
+ * 내부적으로 도메인 객체를 Entity 로 변환하고, Entity 를 도메인 객체로 변환한다.
+ */
 @Repository
 @RequiredArgsConstructor
 public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort {
@@ -28,7 +33,7 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
   @Override
   @Transactional
   public void save(Long memberId, MemberAccountDomain friendAccountDomain) {
-    FriendShip friendShipEntity = friendShipMapper.toEntity(memberId, friendAccountDomain);
+    FriendShip friendShipEntity = friendShipMapper.toJpaEntity(memberId, friendAccountDomain);
     friendShipRepository.save(friendShipEntity);
   }
 

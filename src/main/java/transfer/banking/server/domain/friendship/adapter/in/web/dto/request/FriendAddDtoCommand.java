@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.friendship.adapter.in.web.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 
@@ -10,10 +11,11 @@ public class FriendAddDtoCommand {
   private final Bank friendAccountBank;
   private final String friendAccountNumber;
 
-  public FriendAddDtoCommand(FriendAddDto friendAddDto) {
-    this.memberId = friendAddDto.getMemberId();
-    this.friendAccountBank = friendAddDto.getFriendAccountBank();
-    this.friendAccountNumber = friendAddDto.getFriendAccountNumber();
+  @Builder
+  public FriendAddDtoCommand(Long memberId, Bank friendAccountBank, String friendAccountNumber) {
+    this.memberId = memberId;
+    this.friendAccountBank = friendAccountBank;
+    this.friendAccountNumber = friendAccountNumber;
   }
 
 }

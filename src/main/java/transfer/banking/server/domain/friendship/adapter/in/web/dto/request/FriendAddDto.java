@@ -15,4 +15,11 @@ public class FriendAddDto {
   private Bank friendAccountBank;
   private String friendAccountNumber;
 
+  public FriendAddDtoCommand toCommand() {
+    return FriendAddDtoCommand.builder()
+        .memberId(this.memberId)
+        .friendAccountBank(this.friendAccountBank)
+        .friendAccountNumber(this.friendAccountNumber)
+        .build();
+  }
 }
