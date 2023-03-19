@@ -1,9 +1,8 @@
 package transfer.banking.server.domain.member.adapter.in.web.dto.request;
 
-import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 
 /**
  * 회원가입 요청 DTO
@@ -38,6 +37,18 @@ public class SignUpDto {
   private String phoneNumber;
 
 
-
-
+  /**
+   * SignUpDto 를 SignUpDtoCommand 로 변환한다.
+   * 외부 Dto 를 내부 Command 로 변환하는 이유는 외부 Dto 는 변화에 민감하기 때문이다.
+   * @return SignUpDtoCommand
+   */
+  public SignUpDtoCommand toCommand() {
+    return SignUpDtoCommand.builder()
+        .name(this.name)
+        .username(this.username)
+        .password(this.password)
+        .email(this.email)
+        .phoneNumber(this.phoneNumber)
+        .build();
+  }
 }

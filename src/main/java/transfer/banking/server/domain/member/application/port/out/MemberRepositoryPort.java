@@ -24,7 +24,6 @@ public interface MemberRepositoryPort {
 
   MemberDomain save(MemberDomain domain);
 
-
   boolean existsByUsername(String username);
 
   boolean existsByEmail(String email);

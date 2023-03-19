@@ -36,12 +36,15 @@ public class MemberController {
 
   /**
    * 회원가입
+   * @param signUpDto 회원가입 정보
+   * @return 회원가입 결과
    */
   @PostMapping("/sign-up")
   public ResponseEntity<DataResponse<MemberInfoDto>> signUp(@RequestBody SignUpDto signUpDto) {
-    SignUpDtoCommand reqCommand = new SignUpDtoCommand(signUpDto);
 
-    MemberInfoDtoCommand resCommand = memberSignUpUseCase.signUp(reqCommand);
+    SignUpDtoCommand signUpDtoCommand = signUpDto.toCommand();
+
+    MemberInfoDtoCommand resCommand = memberSignUpUseCase.signUp(signUpDtoCommand);
 
     MemberInfoDto memberInfoDto = new MemberInfoDto(resCommand);
     return new ResponseEntity<>(DataResponse.of(HttpStatus.OK, "회원가입 성공", memberInfoDto), HttpStatus.OK);
