@@ -33,7 +33,7 @@ import transfer.banking.server.domain.common.BaseTimeEntity;
 @Table(
     name = "friendships",
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"member_id", "friend_id"})
+        @UniqueConstraint(columnNames = {"member_id", "friend_id", "friend_account_number"})
     }
 )
 public class FriendShip extends BaseTimeEntity {
@@ -48,11 +48,19 @@ public class FriendShip extends BaseTimeEntity {
   @Column(name = "friend_id", nullable = false)
   private Long friendId;
 
+  @Column(nullable = false)
+  private Long transactionCount;
+
+  @Column(name = "friend_account_number", nullable = false)
+  private String friendAccountNumber;
+
   @Builder
-  public FriendShip(Long id, Long memberId, Long friendId) {
+  public FriendShip(Long id, Long memberId, Long friendId, Long transactionCount, String friendAccountNumber) {
     this.id = id;
     this.memberId = memberId;
     this.friendId = friendId;
+    this.transactionCount = transactionCount;
+    this.friendAccountNumber = friendAccountNumber;
   }
 
 }
