@@ -33,8 +33,6 @@ public class MemberAccountService {
    * @param accountDomain 개설된 계좌 도메인
    */
   public void saveMemberAccount(MemberDomain memberDomain, AccountDomain accountDomain) {
-    log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", memberDomain.getName(),
-        accountDomain.getAccountNumber());
     memberAccountRepository.save(memberDomain, accountDomain);
   }
 
@@ -51,22 +49,14 @@ public class MemberAccountService {
         .orElseThrow(() -> new MemberNotFoundException(FRIEND_NOT_FOUND));
   }
 
+  /**
+   * 친구 계좌번호 목록을 통해 친구 계좌 도메인 목록을 조회
+   *
+   * @param myFriendsAccountNumbers 내 친구 계좌번호 목록
+   * @return 내 친구 계좌 도메인 목록
+   */
   public List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers) {
     return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers);
   }
-//
-//  /**
-//   * 친구 이름과 계좌번호를 통해 친구 계좌를 조회
-//   *
-//   * @param friendAccountBank 친구 계좌 은행
-//   * @param friendAccountNumber 친구 계좌번호
-//   * @return 친구
-//   */
-//  @Transactional(readOnly = true)
-//  public Member findFriendByBankAndAccountNumber(Bank friendAccountBank, String friendAccountNumber) {
-//    log.info("친구 이름과 계좌번호를 통해 친구를 조회합니다. friendAccountBank: {}, friendAccountNumber: {}", friendAccountBank,
-//        friendAccountNumber);
-//    return memberAccountRepository.findFriendByBankAndAccountNumber(friendAccountBank, friendAccountNumber)
-//        .orElseThrow(() -> new MemberNotFoundException(FRIEND_NOT_FOUND));
-//  }
+
 }

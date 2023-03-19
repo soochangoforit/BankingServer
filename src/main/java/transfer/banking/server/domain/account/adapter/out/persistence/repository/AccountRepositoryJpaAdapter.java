@@ -1,6 +1,7 @@
 package transfer.banking.server.domain.account.adapter.out.persistence.repository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.application.port.out.AccountRepositoryPort;
@@ -13,6 +14,7 @@ import transfer.banking.server.domain.account.domain.AccountDomain;
  */
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
 
   private final AccountRepository accountRepository;
@@ -21,6 +23,7 @@ public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
   @Override
   @Transactional(readOnly = true)
   public boolean existsByAccountNumber(String accountNumber) {
+    log.info("계좌번호가 존재하는지 확인합니다. accountNumber: {}", accountNumber);
     return accountRepository.existsByAccountNumber(accountNumber);
   }
 
@@ -28,6 +31,7 @@ public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
   @Transactional
   public AccountDomain save(AccountDomain accountDomain) {
     Account account = accountMapper.toJpaEntity(accountDomain);
+    log.info("계좌를 저장합니다. accountNumber: {}", account.getAccountNumber());
     accountRepository.save(account);
     return accountMapper.toDomain(account);
   }

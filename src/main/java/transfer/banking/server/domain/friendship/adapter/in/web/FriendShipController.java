@@ -46,6 +46,9 @@ public class FriendShipController {
 
   /**
    * 내가 등록한 친구 목록 조회
+   *
+   * @param memberId 회원 ID
+   * @return 친구 계좌 목록 응답
    */
   @GetMapping("/my-friends")
   public ResponseEntity<DataResponse<List<MyFriendsAccountDto>>> searchMyFriends(@RequestParam("memberId") Long memberId) {

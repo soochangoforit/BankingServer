@@ -15,5 +15,5 @@ public interface FriendShipRepository extends JpaRepository<FriendShip, Long> {
       @Param("friendAccountNumber") String friendAccountNumber);
 
   @Query("select fs.friendAccountNumber from FriendShip fs where fs.memberId = :memberId order by fs.transactionCount desc")
-  List<String> findByMemberId(@Param("memberId") Long memberId);
+  List<String> findFriendAccountNumByMemberId(@Param("memberId") Long memberId);
 }

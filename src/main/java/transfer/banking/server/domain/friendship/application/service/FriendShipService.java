@@ -42,12 +42,16 @@ public class FriendShipService {
    * @param friendAccountDomain 추가하고자 하는 친구 계좌 도메인 객체
    */
   public void saveFriendShip(Long memberId, MemberAccountDomain friendAccountDomain) {
-    log.info("친구 관계를 저장합니다. memberId: {}, friendId: {}", memberId, friendAccountDomain.getMember().getId());
     friendShipRepository.save(memberId, friendAccountDomain);
   }
 
-  public List<String> searchMyFriends(Long memberId) {
-    log.info("친구 id 목록을 조회합니다. memberId: {}", memberId);
+  /**
+   * 내 친구 계좌번호 목록을 조회
+   *
+   * @param memberId 내 멤버 id
+   * @return 내 친구 계좌번호 목록
+   */
+  public List<String> searchMyFriendsAccountNum(Long memberId) {
     return friendShipRepository.searchMyFriends(memberId);
   }
 }

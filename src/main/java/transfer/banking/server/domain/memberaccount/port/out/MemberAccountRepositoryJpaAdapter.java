@@ -29,18 +29,23 @@ public class MemberAccountRepositoryJpaAdapter implements MemberAccountRepositor
   @Transactional
   public void save(MemberDomain memberDomain, AccountDomain accountDomain) {
     MemberAccount memberAccount = memberAccountMapper.toJpaEntity(memberDomain, accountDomain);
+    log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", memberDomain.getName(),
+        accountDomain.getAccountNumber());
     memberAccountRepository.save(memberAccount);
   }
 
   @Override
   public Optional<MemberAccountDomain> findFriendAccountByNumAndBank(String friendAccountNumber,
       Bank friendAccountBank) {
+    log.info("친구 계좌를 조회합니다. friendAccountNumber: {}, friendAccountBank: {}", friendAccountNumber,
+        friendAccountBank);
     return memberAccountRepository.findFriendAccountByNumAndBank(friendAccountNumber, friendAccountBank)
         .map(memberAccountMapper::toDomain);
   }
 
   @Override
   public List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers) {
+    log.info("친구 계좌를 조회합니다. myFriendsAccountNumbers: {}", myFriendsAccountNumbers);
     return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers).stream()
         .map(memberAccountMapper::toDomain)
         .toList();
