@@ -1,7 +1,7 @@
 package transfer.banking.server.domain.member.adapter.in.web.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
-import transfer.banking.server.domain.member.adapter.in.web.dto.request.SignUpDto;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
 
@@ -33,6 +33,7 @@ public class SignUpDtoCommand {
    */
   private final String phoneNumber;
 
+  @Builder
   public SignUpDtoCommand (SignUpDto signUpDto) {
     this.name = signUpDto.getName();
     this.username = signUpDto.getUsername();

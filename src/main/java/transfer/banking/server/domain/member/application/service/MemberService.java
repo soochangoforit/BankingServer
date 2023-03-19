@@ -11,9 +11,8 @@ import transfer.banking.server.domain.member.domain.MemberDomain;
 
 /**
  * 멤버 순수 서비스, 필드 값으로 Repository 접근을 위한 Port Interface 를 사용한다.
- *
  * 트랜잭션을 아직 시작하지 않는다.
- * DB 접근을 위한 Adapter Class 에서 트랜잭션을 시작한다.
+ * DB 접근을 위한 Repository Adapter Class 에서 트랜잭션을 시작한다.
  */
 @Service
 @RequiredArgsConstructor

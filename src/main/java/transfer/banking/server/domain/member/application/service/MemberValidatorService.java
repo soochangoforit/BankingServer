@@ -12,7 +12,6 @@ import transfer.banking.server.domain.member.domain.MemberDomain;
 
 /**
  * 회원가입 시 중복된 필드가 있는지 검증하는 서비스. (중간 복합 서비스)
- *
  * 필드 값으로 Repository 접근을 위한 Port Interface 를 사용한다.
  * 파라미터 값으로 Domain 을 사용한다.
  * 응답 값으로 Domain 을 사용한다.
