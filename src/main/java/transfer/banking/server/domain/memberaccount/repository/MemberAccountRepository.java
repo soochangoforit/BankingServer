@@ -16,4 +16,7 @@ public interface MemberAccountRepository extends JpaRepository<MemberAccount, Lo
 
   @Query("select ma from MemberAccount ma join fetch ma.member m join fetch ma.account ac where ac.accountNumber in :myFriendsAccountNumbers")
   List<MemberAccount> searchFriendsAccount(@Param("myFriendsAccountNumbers") List<String> myFriendsAccountNumbers);
+
+  @Query("select ma from MemberAccount ma  where ma.member.id = :memberId and ma.account.id = :accountId")
+  Optional<MemberAccount> checkIfMemberOwnsAccount(@Param("memberId") Long memberId, @Param("accountId") Long accountId);
 }

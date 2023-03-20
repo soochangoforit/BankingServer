@@ -50,4 +50,10 @@ public class MemberAccountRepositoryJpaAdapter implements MemberAccountRepositor
         .map(memberAccountMapper::toDomain)
         .toList();
   }
+
+  @Override
+  public boolean checkIfMemberOwnsAccount(Long memberId, Long accountId) {
+    log.info("멤버가 계좌를 소유하고 있는지 확인합니다. memberId: {}, accountId: {}", memberId, accountId);
+    return memberAccountRepository.checkIfMemberOwnsAccount(memberId, accountId).isPresent();
+  }
 }
