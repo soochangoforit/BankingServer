@@ -1,9 +1,14 @@
 package transfer.banking.server.domain.account.application.service;
 
 
+import static transfer.banking.server.global.exception.ErrorCode.ACCOUNT_NOT_FOUND;
+
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
+import transfer.banking.server.domain.account.application.exception.NotFoundAccountException;
 import transfer.banking.server.domain.account.application.port.out.AccountRepositoryPort;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 
@@ -39,5 +44,17 @@ public class AccountService {
    */
   public AccountDomain openAccount(AccountDomain accountDomain) {
     return accountRepository.save(accountDomain);
+  }
+
+  /**
+   * 계좌 조회
+   *
+   * @param accountBank 계좌 은행
+   * @param accountNumber 계좌 번호
+   * @return 계좌 도메인
+   */
+  public AccountDomain findAccountIdByBankAndNumber(Bank accountBank, String accountNumber) {
+    return accountRepository.findAccountByBankAndNumber(accountBank, accountNumber)
+        .orElseThrow(() -> new NotFoundAccountException(ACCOUNT_NOT_FOUND));
   }
 }

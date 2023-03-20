@@ -17,4 +17,6 @@ public interface MemberAccountRepositoryPort {
   Optional<MemberAccountDomain> findFriendAccountByNumAndBank(String friendAccountNumber, Bank friendAccountBank);
 
   List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers);
+
+  boolean checkIfMemberOwnsAccount(Long memberId, Long accountId);
 }

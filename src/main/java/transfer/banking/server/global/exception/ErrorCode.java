@@ -25,7 +25,8 @@ public enum ErrorCode {
   ALREADY_FRIEND(HttpStatus.BAD_REQUEST, "M006", "이미 등록한 친구의 계좌입니다."),
 
   // Account (계좌 관련)
-  ACCOUNT_NOT_FOUND(HttpStatus.BAD_REQUEST, "A001", "존재하지 않는 계좌입니다.");
+  ACCOUNT_NOT_FOUND(HttpStatus.BAD_REQUEST, "A001", "존재하지 않는 계좌입니다."),
+  NOT_ACCOUNT_OWNER(HttpStatus.BAD_REQUEST, "A002", "계좌 소유자가 아닙니다.");
 
 
 

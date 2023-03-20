@@ -1,12 +1,14 @@
 package transfer.banking.server.domain.memberaccount.service;
 
 import static transfer.banking.server.global.exception.ErrorCode.FRIEND_NOT_FOUND;
+import static transfer.banking.server.global.exception.ErrorCode.NOT_ACCOUNT_OWNER;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
+import transfer.banking.server.domain.account.application.exception.NotAccountOwnerException;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
@@ -59,4 +61,15 @@ public class MemberAccountService {
     return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers);
   }
 
+  /**
+   * 멤버가 해당 계좌를 소유하고 있는지 확인
+   *
+   * @param memberId 잔액을 조회하고자 하는 멤버 아이디
+   * @param accountId 잔액을 조회하고자 하는 계좌 아이디
+   */
+  public void checkIfMemberOwnsAccount(Long memberId, Long accountId) {
+    if(!memberAccountRepository.checkIfMemberOwnsAccount(memberId, accountId)){
+      throw new NotAccountOwnerException(NOT_ACCOUNT_OWNER);
+    }
+  }
 }
