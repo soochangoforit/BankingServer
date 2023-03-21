@@ -12,12 +12,15 @@ import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountB
 import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountOpenDto;
 import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountOpenDtoCommand;
 import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountSearchDtoCommand;
+import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountTransferDto;
+import transfer.banking.server.domain.account.adapter.in.web.dto.reqest.AccountTransferDtoCommand;
 import transfer.banking.server.domain.account.adapter.in.web.dto.response.AccountBalanceSearchResDto;
 import transfer.banking.server.domain.account.adapter.in.web.dto.response.AccountOpenedDto;
 import transfer.banking.server.domain.account.adapter.in.web.dto.response.AccountOpenedDtoCommand;
 import transfer.banking.server.domain.account.adapter.in.web.dto.response.AccountSearchDtoResCommand;
 import transfer.banking.server.domain.account.application.port.in.AccountBalanceSearchUseCase;
 import transfer.banking.server.domain.account.application.port.in.AccountOpenUseCase;
+import transfer.banking.server.domain.account.application.port.in.AccountTransferUseCase;
 import transfer.banking.server.global.response.DataResponse;
 
 /**
@@ -30,6 +33,7 @@ public class AccountController {
 
   private final AccountOpenUseCase accountOpenUseCase;
   private final AccountBalanceSearchUseCase accountBalanceSearchUseCase;
+  private final AccountTransferUseCase accountTransferUseCase;
 
   /**
    * 계좌 개설
@@ -67,6 +71,20 @@ public class AccountController {
     AccountBalanceSearchResDto resDto = new AccountBalanceSearchResDto(resCommand);
     return new ResponseEntity<>(DataResponse.of(HttpStatus.OK, "계좌 잔액 조회 성공", resDto),
         HttpStatus.OK);
+  }
+
+  /**
+   * 계좌 이체
+   * - api 요청자 member id
+   * - 이체할 계좌 정보
+   * - 이체 받을 계좌 정보
+   * - 이체 금액
+   */
+  @PostMapping("/transfer")
+  public String transfer(@RequestBody AccountTransferDto accountTransferDto) {
+    AccountTransferDtoCommand command = accountTransferDto.toCommand();
+    accountTransferUseCase.transfer(command);
+    return "계좌 이체 성공";
   }
 
 }

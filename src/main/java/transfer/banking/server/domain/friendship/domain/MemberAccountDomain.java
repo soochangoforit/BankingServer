@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.friendship.domain;
 
+import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
 import transfer.banking.server.domain.account.domain.AccountDomain;
@@ -19,4 +20,7 @@ public class MemberAccountDomain {
     this.account = account;
   }
 
+  public void deposit(BigDecimal transferAmount) {
+    this.account.deposit(transferAmount);
+  }
 }

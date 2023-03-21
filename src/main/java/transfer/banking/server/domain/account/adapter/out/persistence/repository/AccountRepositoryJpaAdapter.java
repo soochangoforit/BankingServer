@@ -45,4 +45,13 @@ public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
     return accountRepository.findAccountIdByBankAndNumber(accountBank, accountNumber)
         .map(accountMapper::toDomain);
   }
+
+  @Override
+  @Transactional
+  public Optional<AccountDomain> findAccountByBankAndNumberWithLock(Bank bank,
+      String accountNumber) {
+    log.info("계좌번호로 계좌 아이디를 조회합니다. (락) accountBank: {}, accountNumber: {}", bank, accountNumber);
+    return accountRepository.findAccountIdByBankAndNumberWithLock(bank, accountNumber)
+        .map(accountMapper::toDomain);
+  }
 }

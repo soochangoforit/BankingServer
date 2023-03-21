@@ -26,7 +26,9 @@ public enum ErrorCode {
 
   // Account (계좌 관련)
   ACCOUNT_NOT_FOUND(HttpStatus.BAD_REQUEST, "A001", "존재하지 않는 계좌입니다."),
-  NOT_ACCOUNT_OWNER(HttpStatus.BAD_REQUEST, "A002", "계좌 소유자가 아닙니다.");
+  NOT_ACCOUNT_OWNER(HttpStatus.BAD_REQUEST, "A002", "계좌 소유자가 아닙니다."),
+  NOT_ENOUGH_BALANCE(HttpStatus.BAD_REQUEST, "A003", "잔액이 부족합니다."),
+  CAN_TRANSFER_WITH_ONLY_FRIEND(HttpStatus.BAD_REQUEST, "A004", "친구의 계좌로만 이체가 가능합니다.");
 
 
 
