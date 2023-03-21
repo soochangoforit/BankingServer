@@ -1,11 +1,13 @@
 package transfer.banking.server.domain.friendship.application.service;
 
 import static transfer.banking.server.global.exception.ErrorCode.ALREADY_FRIEND;
+import static transfer.banking.server.global.exception.ErrorCode.CAN_TRANSFER_WITH_ONLY_FRIEND;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import transfer.banking.server.domain.account.application.exception.CanTransferWithOnlyFriend;
 import transfer.banking.server.domain.friendship.application.exception.AlreadyFriendException;
 import transfer.banking.server.domain.friendship.application.port.out.FriendShipRepositoryPort;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
@@ -53,5 +55,11 @@ public class FriendShipService {
    */
   public List<String> searchMyFriendsAccountNum(Long memberId) {
     return friendShipRepository.searchMyFriends(memberId);
+  }
+
+  public void canTransferOnlyWithFriend(Long memberId, MemberAccountDomain friendAccountDomain) {
+    if (!friendShipRepository.existsByMemberIdAndFriendIdAndFriendAccountNum(memberId, friendAccountDomain)) {
+      throw new CanTransferWithOnlyFriend(CAN_TRANSFER_WITH_ONLY_FRIEND);
+    }
   }
 }

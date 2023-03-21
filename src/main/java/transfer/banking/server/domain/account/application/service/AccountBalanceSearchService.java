@@ -28,7 +28,7 @@ public class AccountBalanceSearchService implements AccountBalanceSearchUseCase 
   @Override
   public AccountSearchDtoResCommand searchAccountBalance(AccountSearchDtoCommand command) {
     // bank 랑 number 를 통해서 account id 조회
-    AccountDomain accountDomain = accountService.findAccountIdByBankAndNumber(
+    AccountDomain accountDomain = accountService.findAccountByBankAndNumber(
         command.getAccountBank(), command.getAccountNumber());
 
     // account id 와 member id를 통해서 주인 확인
