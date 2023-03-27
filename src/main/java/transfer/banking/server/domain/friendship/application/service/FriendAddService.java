@@ -32,10 +32,12 @@ public class FriendAddService implements FriendAddUseCase {
     MemberAccountDomain friendAccountDomain = memberAccountService.findFriendAccountByNumAndBank(
         command.getFriendAccountNumber(), command.getFriendAccountBank());
 
+    Long friendId = friendAccountDomain.getMember().getId();
+
     friendShipService.checkIfFriendShipExists(command.getMemberId(),
-        friendAccountDomain);
+        friendId);
 
     friendShipService.saveFriendShip(command.getMemberId(),
-        friendAccountDomain);
+        friendId);
   }
 }
