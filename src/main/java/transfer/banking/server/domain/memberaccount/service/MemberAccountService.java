@@ -3,7 +3,6 @@ package transfer.banking.server.domain.memberaccount.service;
 import static transfer.banking.server.global.exception.ErrorCode.FRIEND_NOT_FOUND;
 import static transfer.banking.server.global.exception.ErrorCode.NOT_ACCOUNT_OWNER;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -51,15 +50,6 @@ public class MemberAccountService {
         .orElseThrow(() -> new MemberNotFoundException(FRIEND_NOT_FOUND));
   }
 
-  /**
-   * 친구 계좌번호 목록을 통해 친구 계좌 도메인 목록을 조회
-   *
-   * @param myFriendsAccountNumbers 내 친구 계좌번호 목록
-   * @return 내 친구 계좌 도메인 목록
-   */
-  public List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers) {
-    return memberAccountRepository.searchFriendsAccount(myFriendsAccountNumbers);
-  }
 
   /**
    * 멤버가 해당 계좌를 소유하고 있는지 확인

@@ -2,7 +2,7 @@ package transfer.banking.server.domain.friendship.application.port.in;
 
 import java.util.List;
 import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.MemberIdCommand;
-import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsAccountCommand;
+import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsInfoCommand;
 
 /**
  * 친구 계좌 조회 UseCase
@@ -10,5 +10,5 @@ import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyF
  */
 public interface FriendSearchUseCase {
 
-  List<MyFriendsAccountCommand> searchMyFriends(MemberIdCommand command);
+  List<MyFriendsInfoCommand> searchMyFriends(MemberIdCommand command);
 }

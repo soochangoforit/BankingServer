@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.adapter.out.persistence.repository;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,13 @@ public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {
     log.info("memberId = {} 의 존재 여부를 확인합니다.", memberId);
     Optional<Member> optionalMember = memberJpaRepository.findById(memberId);
     return optionalMember.map(memberMapper::toDomain);
+  }
+
+  @Override
+  public List<MemberDomain> findByIds(List<Long> myFriendIds) {
+    log.info("memberId = {} 인 member 들을 찾습니다.", myFriendIds);
+    List<Member> memberEntities = memberJpaRepository.findByIdIn(myFriendIds);
+    return memberMapper.toDomainList(memberEntities);
   }
 
 

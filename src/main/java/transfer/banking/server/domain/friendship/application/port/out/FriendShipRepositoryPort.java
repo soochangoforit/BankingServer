@@ -11,5 +11,5 @@ public interface FriendShipRepositoryPort {
 
   void save(Long memberId, Long friendId);
 
-  List<String> searchMyFriends(Long memberId);
+  List<Long> searchMyFriends(Long memberId);
 }
