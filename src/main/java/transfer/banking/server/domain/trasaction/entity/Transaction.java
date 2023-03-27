@@ -64,11 +64,26 @@ public class Transaction extends BaseTimeEntity {
   @Column(nullable = false)
   private BigDecimal amount;
 
+  /**
+   * 거래 후 송신자 잔액
+   */
+  @Column(nullable = false)
+  private BigDecimal senderLeftBalance;
+
+  /**
+   * 거래 후 수신자 잔액
+   */
+  @Column(nullable = false)
+  private BigDecimal receiverLeftBalance;
+
   @Builder
-  public Transaction(Account sender, Account receiver, BigDecimal amount) {
+  public Transaction(Long id, Account sender, Account receiver, BigDecimal amount, BigDecimal senderLeftBalance, BigDecimal receiverLeftBalance) {
+    this.id = id;
     this.sender = sender;
     this.receiver = receiver;
     this.amount = amount;
+    this.senderLeftBalance = senderLeftBalance;
+    this.receiverLeftBalance = receiverLeftBalance;
   }
 
 

@@ -16,8 +16,6 @@ public class FriendShipMapper {
     return FriendShip.builder()
         .memberId(memberId)
         .friendId(friendAccountDomain.getMember().getId())
-        .transactionCount(0L)
-        .friendAccountNumber(friendAccountDomain.getAccount().getAccountNumber())
         .build();
   }
 }
