@@ -32,7 +32,7 @@ public class MemberSignUpService implements MemberSignUpUseCase {
   public MemberInfoDtoCommand signUp(SignUpDtoCommand command) {
     MemberDomain domain = command.toMemberDomain();
 
-    memberValidatorService.validate(domain);
+    memberValidatorService.validateDuplicate(domain);
     MemberDomain memberDomain = memberService.signUp(domain);
 
     return new MemberInfoDtoCommand(memberDomain);

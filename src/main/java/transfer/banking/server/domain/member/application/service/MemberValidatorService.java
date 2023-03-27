@@ -26,7 +26,7 @@ public class MemberValidatorService {
    * 회원가입 시 중복된 필드가 있는지 검증.
    * @param memberDomain 회원 도메인 객체
    */
-  public void validate(MemberDomain memberDomain) {
+  public void validateDuplicate(MemberDomain memberDomain) {
     if (memberService.existsByUsername(memberDomain.getUsername())) {
       throw new DuplicateMemberException(USERNAME_DUPLICATION);
     }
