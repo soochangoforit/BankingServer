@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.application.mapper;
 
+import java.util.List;
 import org.springframework.stereotype.Component;
 import transfer.banking.server.domain.member.adapter.out.persistence.entity.Member;
 import transfer.banking.server.domain.member.domain.MemberDomain;
@@ -40,4 +41,9 @@ public class MemberMapper {
   }
 
 
+  public List<MemberDomain> toDomainList(List<Member> memberEntities) {
+    return memberEntities.stream()
+        .map(this::toDomain)
+        .toList();
+  }
 }

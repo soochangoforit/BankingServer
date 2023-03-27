@@ -40,8 +40,8 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
 
   @Override
   @Transactional(readOnly = true)
-  public List<String> searchMyFriends(Long memberId) {
-    log.info("친구 계좌번호 목록을 조회합니다. memberId: {}", memberId);
-    return friendShipRepository.findFriendAccountNumByMemberId(memberId);
+  public List<Long> searchMyFriends(Long memberId) {
+    log.info("친구 id 목록을 조회합니다. memberId: {}", memberId);
+    return friendShipRepository.findFriendIdsByMemberId(memberId);
   }
 }

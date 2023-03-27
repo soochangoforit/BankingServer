@@ -51,9 +51,9 @@ public class FriendShipService {
    * 내 친구 계좌번호 목록을 조회
    *
    * @param memberId 내 멤버 id
-   * @return 내 친구 계좌번호 목록
+   * @return 내 친구 id 목록
    */
-  public List<String> searchMyFriendsAccountNum(Long memberId) {
+  public List<Long> searchMyFriendsId(Long memberId) {
     return friendShipRepository.searchMyFriends(memberId);
   }
 

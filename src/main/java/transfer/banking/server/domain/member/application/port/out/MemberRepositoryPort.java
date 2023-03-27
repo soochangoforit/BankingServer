@@ -1,5 +1,6 @@
 package transfer.banking.server.domain.member.application.port.out;
 
+import java.util.List;
 import java.util.Optional;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
@@ -33,4 +34,6 @@ public interface MemberRepositoryPort {
   boolean existsByPhoneNumber(String phoneNumber);
 
   Optional<MemberDomain> findById(Long memberId);
+
+  List<MemberDomain> findByIds(List<Long> myFriendIds);
 }

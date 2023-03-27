@@ -1,6 +1,5 @@
 package transfer.banking.server.domain.memberaccount.port.out;
 
-import java.util.List;
 import java.util.Optional;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 import transfer.banking.server.domain.account.domain.AccountDomain;
@@ -16,7 +15,6 @@ public interface MemberAccountRepositoryPort {
 
   Optional<MemberAccountDomain> findFriendAccountByNumAndBank(String friendAccountNumber, Bank friendAccountBank);
 
-  List<MemberAccountDomain> searchFriendsAccount(List<String> myFriendsAccountNumbers);
 
   boolean checkIfMemberOwnsAccount(Long memberId, Long accountId);
 }

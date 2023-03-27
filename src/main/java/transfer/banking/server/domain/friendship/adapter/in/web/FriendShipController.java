@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.FriendAddDto;
 import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.FriendAddDtoCommand;
 import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.MemberIdCommand;
-import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsAccountCommand;
-import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsAccountDto;
+import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsInfoCommand;
+import transfer.banking.server.domain.friendship.adapter.in.web.dto.response.MyFriendsInfoDto;
 import transfer.banking.server.domain.friendship.application.port.in.FriendAddUseCase;
 import transfer.banking.server.domain.friendship.application.port.in.FriendSearchUseCase;
 import transfer.banking.server.global.response.DataResponse;
@@ -48,13 +48,13 @@ public class FriendShipController {
    * 내가 등록한 친구 목록 조회
    *
    * @param memberId 회원 ID
-   * @return 친구 계좌 목록 응답
+   * @return 친구 목록 응답
    */
   @GetMapping("/my-friends")
-  public ResponseEntity<DataResponse<List<MyFriendsAccountDto>>> searchMyFriends(@RequestParam("memberId") Long memberId) {
+  public ResponseEntity<DataResponse<List<MyFriendsInfoDto>>> searchMyFriends(@RequestParam("memberId") Long memberId) {
     MemberIdCommand command = new MemberIdCommand(memberId);
-    List<MyFriendsAccountCommand> commands = friendSearchUseCase.searchMyFriends(command);
-    List<MyFriendsAccountDto> responseDtoList = MyFriendsAccountDto.toDtos(commands);
+    List<MyFriendsInfoCommand> commands = friendSearchUseCase.searchMyFriends(command);
+    List<MyFriendsInfoDto> responseDtoList = MyFriendsInfoDto.toDtos(commands);
     return new ResponseEntity<>(DataResponse.of(HttpStatus.OK, "친구 목록 조회 성공", responseDtoList), HttpStatus.OK);
   }
 

@@ -2,6 +2,7 @@ package transfer.banking.server.domain.member.application.service;
 
 import static transfer.banking.server.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -75,5 +76,14 @@ public class MemberService {
   public MemberDomain findMemberById(Long memberId) {
     return memberRepository.findById(memberId)
         .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+  }
+
+  /**
+   * 친구 목록 조회
+   *
+   * @param myFriendIds 친구 아이디 목록
+   */
+  public List<MemberDomain> findMemberByIds(List<Long> myFriendIds) {
+     return memberRepository.findByIds(myFriendIds);
   }
 }

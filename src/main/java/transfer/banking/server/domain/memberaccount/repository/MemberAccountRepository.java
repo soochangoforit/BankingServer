@@ -1,6 +1,5 @@
 package transfer.banking.server.domain.memberaccount.repository;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,10 +11,6 @@ public interface MemberAccountRepository extends JpaRepository<MemberAccount, Lo
 
   @Query("select ma from MemberAccount ma join fetch ma.member m join fetch ma.account ac where ac.bank = :bank and ac.accountNumber = :accountNumber")
   Optional<MemberAccount> findFriendAccountByNumAndBank(@Param("accountNumber") String accountNumber, @Param("bank") Bank bank);
-
-
-  @Query("select ma from MemberAccount ma join fetch ma.member m join fetch ma.account ac where ac.accountNumber in :myFriendsAccountNumbers")
-  List<MemberAccount> searchFriendsAccount(@Param("myFriendsAccountNumbers") List<String> myFriendsAccountNumbers);
 
   @Query("select ma from MemberAccount ma  where ma.member.id = :memberId and ma.account.id = :accountId")
   Optional<MemberAccount> checkIfMemberOwnsAccount(@Param("memberId") Long memberId, @Param("accountId") Long accountId);
