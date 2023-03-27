@@ -28,9 +28,8 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
   @Transactional(readOnly = true)
   public boolean existsByMemberIdAndFriendIdAndFriendAccountNum(Long memberId, MemberAccountDomain friendAccountDomain) {
     Long friendId = friendAccountDomain.getMember().getId();
-    String friendAccountNumber = friendAccountDomain.getAccount().getAccountNumber();
-    log.info("친구 관계가 존재하는지 확인합니다. memberId: {}, friendId: {}, friendAccountNumber: {}", memberId, friendId, friendAccountNumber);
-    return friendShipRepository.findByMemberIdAndFriendId(memberId, friendId, friendAccountNumber).isPresent();
+    log.info("친구 관계가 존재하는지 확인합니다. memberId: {}, friendId: {}", memberId, friendId);
+    return friendShipRepository.findByMemberIdAndFriendId(memberId, friendId).isPresent();
   }
 
   @Override
