@@ -2,7 +2,6 @@ package transfer.banking.server.domain.friendship.application.mapper;
 
 import org.springframework.stereotype.Component;
 import transfer.banking.server.domain.friendship.adapter.out.persistence.entity.FriendShip;
-import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 
 /**
  * 친구 관계 Mapper
@@ -12,10 +11,10 @@ import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 public class FriendShipMapper {
 
 
-  public FriendShip toJpaEntity(Long memberId, MemberAccountDomain friendAccountDomain) {
+  public FriendShip toJpaEntity(Long memberId, Long friendId) {
     return FriendShip.builder()
         .memberId(memberId)
-        .friendId(friendAccountDomain.getMember().getId())
+        .friendId(friendId)
         .build();
   }
 }

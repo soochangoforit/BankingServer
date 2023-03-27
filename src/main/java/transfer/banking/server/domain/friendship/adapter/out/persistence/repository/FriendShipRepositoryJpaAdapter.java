@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.friendship.adapter.out.persistence.entity.FriendShip;
 import transfer.banking.server.domain.friendship.application.mapper.FriendShipMapper;
 import transfer.banking.server.domain.friendship.application.port.out.FriendShipRepositoryPort;
-import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 
 /**
  * 친구 관계 Repository Jpa Adapter
@@ -26,17 +25,16 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
 
   @Override
   @Transactional(readOnly = true)
-  public boolean existsByMemberIdAndFriendIdAndFriendAccountNum(Long memberId, MemberAccountDomain friendAccountDomain) {
-    Long friendId = friendAccountDomain.getMember().getId();
+  public boolean existsByMemberIdAndFriendId(Long memberId, Long friendId) {
     log.info("친구 관계가 존재하는지 확인합니다. memberId: {}, friendId: {}", memberId, friendId);
     return friendShipRepository.findByMemberIdAndFriendId(memberId, friendId).isPresent();
   }
 
   @Override
   @Transactional
-  public void save(Long memberId, MemberAccountDomain friendAccountDomain) {
-    FriendShip friendShipEntity = friendShipMapper.toJpaEntity(memberId, friendAccountDomain);
-    log.info("친구 관계를 저장합니다. memberId: {}, friendId: {}", memberId, friendAccountDomain.getMember().getId());
+  public void save(Long memberId, Long friendId) {
+    FriendShip friendShipEntity = friendShipMapper.toJpaEntity(memberId, friendId);
+    log.info("친구 관계를 저장합니다. memberId: {}, friendId: {}", memberId, friendId);
     friendShipRepository.save(friendShipEntity);
   }
 

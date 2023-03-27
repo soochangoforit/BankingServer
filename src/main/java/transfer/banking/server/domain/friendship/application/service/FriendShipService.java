@@ -29,10 +29,10 @@ public class FriendShipService {
    * 친구 관계가 존재하는지 확인
    *
    * @param memberId 친구 관계를 추가하고자 하는 멤버 id
-   * @param friendAccountDomain 추가하고자 하는 친구 계좌 도메인 객체
+   * @param friendId 추가하고자 하는 친구 id
    */
-  public void checkIfFriendShipExists(Long memberId, MemberAccountDomain friendAccountDomain) {
-    if (friendShipRepository.existsByMemberIdAndFriendIdAndFriendAccountNum(memberId, friendAccountDomain)) {
+  public void checkIfFriendShipExists(Long memberId, Long friendId) {
+    if (friendShipRepository.existsByMemberIdAndFriendId(memberId, friendId)) {
       throw new AlreadyFriendException(ALREADY_FRIEND);
     }
   }
@@ -41,10 +41,10 @@ public class FriendShipService {
    * 친구 관계를 저장
    *
    * @param memberId 친구 관계를 추가하고자 하는 멤버 id
-   * @param friendAccountDomain 추가하고자 하는 친구 계좌 도메인 객체
+   * @param friendId 추가하고자 하는 친구 id
    */
-  public void saveFriendShip(Long memberId, MemberAccountDomain friendAccountDomain) {
-    friendShipRepository.save(memberId, friendAccountDomain);
+  public void saveFriendShip(Long memberId, Long friendId) {
+    friendShipRepository.save(memberId, friendId);
   }
 
   /**
