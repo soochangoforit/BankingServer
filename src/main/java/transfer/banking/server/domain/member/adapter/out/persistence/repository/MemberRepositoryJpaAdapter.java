@@ -32,7 +32,6 @@ public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {
   private final MemberMapper memberMapper;
 
   @Override
-  @Transactional
   public MemberDomain save(MemberDomain domain) {
     Member memberEntity = memberMapper.toJpaEntity(domain);
     log.info("member entity 를 저장합니다. member id = {}", memberEntity.getId());
@@ -41,14 +40,12 @@ public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {
   }
 
   @Override
-  @Transactional(readOnly = true)
   public boolean existsByUsername(String username) {
     log.info("username = {} 의 존재 여부를 확인합니다.", username);
     return memberJpaRepository.existsByUsername(username);
   }
 
   @Override
-  @Transactional(readOnly = true)
   public boolean existsByEmail(String email) {
     log.info("email = {} 의 존재 여부를 확인합니다.", email);
     return memberJpaRepository.existsByEmail(email);

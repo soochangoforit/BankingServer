@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 import transfer.banking.server.domain.account.application.exception.NotFoundAccountException;
 import transfer.banking.server.domain.account.application.port.out.AccountRepositoryPort;
@@ -32,6 +33,7 @@ public class AccountService {
    * @param accountNumber 계좌 번호
    * @return 중복된 계좌 번호가 있으면 true, 없으면 false
    */
+  @Transactional(readOnly = true)
   public boolean checkIfAccountNumberExists(String accountNumber) {
     return accountRepository.existsByAccountNumber(accountNumber);
   }
@@ -42,6 +44,7 @@ public class AccountService {
    * @param accountDomain 계좌 도메인
    * @return 개설된 계좌 도메인
    */
+  @Transactional
   public AccountDomain openAccount(AccountDomain accountDomain) {
     return accountRepository.save(accountDomain);
   }
@@ -53,6 +56,7 @@ public class AccountService {
    * @param accountNumber 계좌 번호
    * @return 계좌 도메인
    */
+  @Transactional(readOnly = true)
   public AccountDomain findAccountByBankAndNumber(Bank accountBank, String accountNumber) {
     return accountRepository.findAccountByBankAndNumber(accountBank, accountNumber)
         .orElseThrow(() -> new NotFoundAccountException(ACCOUNT_NOT_FOUND));
@@ -65,6 +69,7 @@ public class AccountService {
    * @param friendAccountDomain 친구 계좌 도메인
    * @param transferAmount      이체 하고자 하는 금액
    */
+  @Transactional
   public void transfer(AccountDomain myAccountDomain, MemberAccountDomain friendAccountDomain,
       BigDecimal transferAmount) {
     // 내 계좌에서 이체 금액을 차감한다.
@@ -74,11 +79,13 @@ public class AccountService {
 
   }
 
+  @Transactional
   public void flushAndSave(AccountDomain myAccountDomain) {
     log.info("계좌 변경 내역을 저장합니다. {} 주인", myAccountDomain.getAccountName());
     accountRepository.save(myAccountDomain);
   }
 
+  @Transactional(readOnly = true)
   public AccountDomain findAccountByBankAndNumberWithLock(Bank bank, String accountNumber) {
     return accountRepository.findAccountByBankAndNumberWithLock(bank, accountNumber)
         .orElseThrow(() -> new NotFoundAccountException(ACCOUNT_NOT_FOUND));

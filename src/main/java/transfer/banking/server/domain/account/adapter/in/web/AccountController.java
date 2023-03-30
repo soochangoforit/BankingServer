@@ -22,6 +22,7 @@ import transfer.banking.server.domain.account.application.port.in.AccountBalance
 import transfer.banking.server.domain.account.application.port.in.AccountOpenUseCase;
 import transfer.banking.server.domain.account.application.port.in.AccountTransferUseCase;
 import transfer.banking.server.global.response.DataResponse;
+import transfer.banking.server.global.response.MessageResponse;
 
 /**
  * 계좌 관련 Controller
@@ -81,10 +82,10 @@ public class AccountController {
    * - 이체 금액
    */
   @PostMapping("/transfer")
-  public String transfer(@RequestBody AccountTransferDto accountTransferDto) {
+  public ResponseEntity<MessageResponse> transfer(@RequestBody AccountTransferDto accountTransferDto) {
     AccountTransferDtoCommand command = accountTransferDto.toCommand();
     accountTransferUseCase.transfer(command);
-    return "계좌 이체 성공";
+    return new ResponseEntity<>(MessageResponse.of(HttpStatus.OK, "계좌 이체 성공"), HttpStatus.OK);
   }
 
 }

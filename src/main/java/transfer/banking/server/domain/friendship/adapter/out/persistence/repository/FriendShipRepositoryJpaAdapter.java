@@ -4,7 +4,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.friendship.adapter.out.persistence.entity.FriendShip;
 import transfer.banking.server.domain.friendship.application.mapper.FriendShipMapper;
 import transfer.banking.server.domain.friendship.application.port.out.FriendShipRepositoryPort;
@@ -24,14 +23,12 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
   private final FriendShipMapper friendShipMapper;
 
   @Override
-  @Transactional(readOnly = true)
   public boolean existsByMemberIdAndFriendId(Long memberId, Long friendId) {
     log.info("친구 관계가 존재하는지 확인합니다. memberId: {}, friendId: {}", memberId, friendId);
     return friendShipRepository.findByMemberIdAndFriendId(memberId, friendId).isPresent();
   }
 
   @Override
-  @Transactional
   public void save(Long memberId, Long friendId) {
     FriendShip friendShipEntity = friendShipMapper.toJpaEntity(memberId, friendId);
     log.info("친구 관계를 저장합니다. memberId: {}, friendId: {}", memberId, friendId);
@@ -39,7 +36,6 @@ public class FriendShipRepositoryJpaAdapter implements FriendShipRepositoryPort 
   }
 
   @Override
-  @Transactional(readOnly = true)
   public List<Long> searchMyFriends(Long memberId) {
     log.info("친구 id 목록을 조회합니다. memberId: {}", memberId);
     return friendShipRepository.findFriendIdsByMemberId(memberId);
