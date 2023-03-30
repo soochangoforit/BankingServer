@@ -7,10 +7,10 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.application.exception.CanTransferWithOnlyFriend;
 import transfer.banking.server.domain.friendship.application.exception.AlreadyFriendException;
 import transfer.banking.server.domain.friendship.application.port.out.FriendShipRepositoryPort;
-import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 
 /**
  * 친구 관계 순수 서비스
@@ -31,6 +31,7 @@ public class FriendShipService {
    * @param memberId 친구 관계를 추가하고자 하는 멤버 id
    * @param friendId 추가하고자 하는 친구 id
    */
+  @Transactional(readOnly = true)
   public void checkIfFriendShipExists(Long memberId, Long friendId) {
     if (friendShipRepository.existsByMemberIdAndFriendId(memberId, friendId)) {
       throw new AlreadyFriendException(ALREADY_FRIEND);
@@ -43,6 +44,7 @@ public class FriendShipService {
    * @param memberId 친구 관계를 추가하고자 하는 멤버 id
    * @param friendId 추가하고자 하는 친구 id
    */
+  @Transactional
   public void saveFriendShip(Long memberId, Long friendId) {
     friendShipRepository.save(memberId, friendId);
   }
@@ -53,12 +55,20 @@ public class FriendShipService {
    * @param memberId 내 멤버 id
    * @return 내 친구 id 목록
    */
+  @Transactional(readOnly = true)
   public List<Long> searchMyFriendsId(Long memberId) {
     return friendShipRepository.searchMyFriends(memberId);
   }
 
-  public void canTransferOnlyWithFriend(Long memberId, MemberAccountDomain friendAccountDomain) {
-    if (!friendShipRepository.existsByMemberIdAndFriendIdAndFriendAccountNum(memberId, friendAccountDomain)) {
+  /**
+   * 계좌 이체를 할 수 있는 친구 관계인지 검증
+   *
+   * @param memberId 이체 하려는 멤버 id
+   * @param friendId 이체 받으려는 친구 id
+   */
+  @Transactional(readOnly = true)
+  public void canTransferOnlyWithFriend(Long memberId, Long friendId) {
+    if (!friendShipRepository.existsByMemberIdAndFriendId(memberId, friendId)) {
       throw new CanTransferWithOnlyFriend(CAN_TRANSFER_WITH_ONLY_FRIEND);
     }
   }
