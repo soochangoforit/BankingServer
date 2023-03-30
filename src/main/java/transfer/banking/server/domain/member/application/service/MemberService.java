@@ -93,4 +93,9 @@ public class MemberService {
   public List<MemberDomain> findMemberByIds(List<Long> myFriendIds) {
      return memberRepository.findByIds(myFriendIds);
   }
+
+  public MemberDomain findMemberByNameAndNumber(String friendName, String friendPhoneNumber) {
+    return memberRepository.findByNameAndPhoneNumber(friendName, friendPhoneNumber)
+        .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+  }
 }

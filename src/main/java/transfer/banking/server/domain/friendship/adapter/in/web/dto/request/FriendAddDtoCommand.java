@@ -2,20 +2,19 @@ package transfer.banking.server.domain.friendship.adapter.in.web.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
-import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 
 @Getter
 public class FriendAddDtoCommand {
 
   private final Long memberId;
-  private final Bank friendAccountBank;
-  private final String friendAccountNumber;
+  private final String friendName;
+  private final String friendPhoneNumber;
 
   @Builder
-  public FriendAddDtoCommand(Long memberId, Bank friendAccountBank, String friendAccountNumber) {
+  public FriendAddDtoCommand(Long memberId, String friendName, String friendPhoneNumber) {
     this.memberId = memberId;
-    this.friendAccountBank = friendAccountBank;
-    this.friendAccountNumber = friendAccountNumber;
+    this.friendName = friendName;
+    this.friendPhoneNumber = friendPhoneNumber;
   }
 
 }

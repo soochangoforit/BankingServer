@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.FriendAddDtoCommand;
 import transfer.banking.server.domain.friendship.application.port.in.FriendAddUseCase;
-import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
+import transfer.banking.server.domain.member.application.service.MemberService;
+import transfer.banking.server.domain.member.domain.MemberDomain;
 import transfer.banking.server.domain.memberaccount.service.MemberAccountService;
 
 /**
@@ -18,6 +19,7 @@ public class FriendAddService implements FriendAddUseCase {
 
   private final FriendShipService friendShipService;
   private final MemberAccountService memberAccountService;
+  private final MemberService memberService;
 
   /**
    * 친구 추가
@@ -29,15 +31,14 @@ public class FriendAddService implements FriendAddUseCase {
   @Override
   public void addFriend(FriendAddDtoCommand command) {
 
-    MemberAccountDomain friendAccountDomain = memberAccountService.findFriendAccountByNumAndBank(
-        command.getFriendAccountNumber(), command.getFriendAccountBank());
-
-    Long friendId = friendAccountDomain.getMember().getId();
+    MemberDomain friendDomain = memberService.findMemberByNameAndNumber(
+        command.getFriendName(),
+        command.getFriendPhoneNumber());
 
     friendShipService.checkIfFriendShipExists(command.getMemberId(),
-        friendId);
+        friendDomain.getId());
 
     friendShipService.saveFriendShip(command.getMemberId(),
-        friendId);
+        friendDomain.getId());
   }
 }

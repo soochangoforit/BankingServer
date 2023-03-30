@@ -15,7 +15,6 @@ import transfer.banking.server.domain.memberaccount.service.MemberAccountService
 @RequiredArgsConstructor
 public class AccountTransferService implements AccountTransferUseCase {
 
-  private final AccountService accountService;
   private final MemberAccountService memberAccountService;
   private final FriendShipService friendShipService;
   private final TransferService transferService;
@@ -34,7 +33,7 @@ public class AccountTransferService implements AccountTransferUseCase {
         command.getToAccountNumber(), command.getFriendBank());
 
     // 계좌 이체를 할 수 있는 계좌인지 확인 (친구 관계인지 검증) - 동시성 고려 X
-    friendShipService.canTransferOnlyWithFriend(command.getMemberId(), friendAccountDomain);
+    friendShipService.canTransferOnlyWithFriend(command.getMemberId(), friendAccountDomain.getMember().getId());
 
     // 실제 이체 트랜잭션
     transferService.transfer(command.getMyBank(), command.getFromAccountNumber(), friendAccountDomain, command.getTransferAmount());

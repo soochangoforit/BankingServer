@@ -73,5 +73,13 @@ public class MemberRepositoryJpaAdapter implements MemberRepositoryPort {
     return memberMapper.toDomainList(memberEntities);
   }
 
+  @Override
+  public Optional<MemberDomain> findByNameAndPhoneNumber(String name,
+      String phoneNumber) {
+    log.info("friendName = {}, friendPhoneNumber = {} 인 member 를 찾습니다.", name,
+        phoneNumber);
+    return memberJpaRepository.findByNameAndPhoneNumber(name, phoneNumber).map(memberMapper::toDomain);
+  }
+
 
 }

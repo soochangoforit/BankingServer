@@ -20,4 +20,7 @@ public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
   @Query("select m from Member m where m.id in :myFriendIds")
   List<Member> findByIdIn(@Param("myFriendIds") List<Long> myFriendIds);
+
+  @Query("select m from Member m where m.name = :name and m.phoneNumber = :phoneNumber")
+  Optional<Member> findByNameAndPhoneNumber(@Param("name") String name, @Param("phoneNumber") String phoneNumber);
 }

@@ -36,4 +36,6 @@ public interface MemberRepositoryPort {
   Optional<MemberDomain> findById(Long memberId);
 
   List<MemberDomain> findByIds(List<Long> myFriendIds);
+
+  Optional<MemberDomain> findByNameAndPhoneNumber(String friendName, String friendPhoneNumber);
 }
