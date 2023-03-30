@@ -4,7 +4,6 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
@@ -25,7 +24,6 @@ public class MemberAccountRepositoryJpaAdapter implements MemberAccountRepositor
   private final MemberAccountMapper memberAccountMapper;
 
   @Override
-  @Transactional
   public void save(MemberDomain memberDomain, AccountDomain accountDomain) {
     MemberAccount memberAccount = memberAccountMapper.toJpaEntity(memberDomain, accountDomain);
     log.info("멤버 계좌를 저장합니다. memberName: {}, accountNumber: {}", memberDomain.getName(),
