@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.member.application.port.out.MemberRepositoryPort;
 import transfer.banking.server.domain.member.application.exception.MemberNotFoundException;
 import transfer.banking.server.domain.member.domain.MemberDomain;
@@ -31,6 +32,7 @@ public class MemberService {
    * @param domain 회원가입 하고자 하는 회원 도메인 객체
    * @return 회원가입이 성공된 회원 도메인 객체
    */
+  @Transactional
   public MemberDomain signUp(MemberDomain domain) {
     return memberRepository.save(domain);
   }
@@ -41,6 +43,7 @@ public class MemberService {
    * @param username 회원가입 하고자 하는 회원 아이디
    * @return 중복된 아이디가 있으면 true, 없으면 false
    */
+  @Transactional(readOnly = true)
   public boolean existsByUsername(String username) {
     return memberRepository.existsByUsername(username);
   }
@@ -51,6 +54,7 @@ public class MemberService {
    * @param email 회원가입 하고자 하는 회원 이메일
    * @return 중복된 이메일이 있으면 true, 없으면 false
    */
+  @Transactional(readOnly = true)
   public boolean existsByEmail(String email) {
     return memberRepository.existsByEmail(email);
   }
@@ -61,6 +65,7 @@ public class MemberService {
    * @param phoneNumber 회원가입 하고자 하는 회원 전화번호
    * @return 중복된 전화번호가 있으면 true, 없으면 false
    */
+  @Transactional(readOnly = true)
   public boolean existsByPhoneNumber(String phoneNumber) {
     return memberRepository.existsByPhoneNumber(phoneNumber);
   }
@@ -73,6 +78,7 @@ public class MemberService {
    * @param memberId 회원 아이디
    * @return 회원 도메인 객체
    */
+  @Transactional(readOnly = true)
   public MemberDomain findMemberById(Long memberId) {
     return memberRepository.findById(memberId)
         .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
@@ -83,6 +89,7 @@ public class MemberService {
    *
    * @param myFriendIds 친구 아이디 목록
    */
+  @Transactional(readOnly = true)
   public List<MemberDomain> findMemberByIds(List<Long> myFriendIds) {
      return memberRepository.findByIds(myFriendIds);
   }
