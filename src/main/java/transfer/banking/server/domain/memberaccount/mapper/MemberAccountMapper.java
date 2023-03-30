@@ -25,6 +25,7 @@ public class MemberAccountMapper {
 
   public MemberAccountDomain toDomain(MemberAccount memberAccountEntity) {
     return MemberAccountDomain.builder()
+        .id(memberAccountEntity.getId())
         .member(memberMapper.toDomain(memberAccountEntity.getMember()))
         .account(accountMapper.toDomain(memberAccountEntity.getAccount()))
         .build();

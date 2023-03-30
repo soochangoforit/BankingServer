@@ -1,10 +1,13 @@
-package transfer.banking.server.domain.trasaction;
+package transfer.banking.server.domain.trasaction.application.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.domain.AccountDomain;
+import transfer.banking.server.domain.trasaction.application.port.out.TransactionRepositoryPort;
+import transfer.banking.server.domain.trasaction.domain.TransactionDomain;
 
 /**
  * 트랜잭션 기록을 저장하는 순수 Service
@@ -24,5 +27,15 @@ public class TransactionService {
 
     transactionRepository.save(myAccount, friendAccount, transferAmount, senderLeftBalance,
         receiverLeftBalance);
+  }
+
+  /**
+   * 계좌 이체 내역 조회
+   *
+   * @param accountDomain 이체 내역을 확인하고자 하는 계좌 도메인 객체
+   */
+  @Transactional(readOnly = true)
+  public List<TransactionDomain> getAllTransactionHistory(AccountDomain accountDomain) {
+    return transactionRepository.findAllByAccount(accountDomain);
   }
 }
