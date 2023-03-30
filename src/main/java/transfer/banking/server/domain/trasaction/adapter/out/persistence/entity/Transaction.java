@@ -1,4 +1,4 @@
-package transfer.banking.server.domain.trasaction.entity;
+package transfer.banking.server.domain.trasaction.adapter.out.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

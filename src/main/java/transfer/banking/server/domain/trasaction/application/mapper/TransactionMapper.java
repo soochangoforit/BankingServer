@@ -1,11 +1,12 @@
-package transfer.banking.server.domain.trasaction;
+package transfer.banking.server.domain.trasaction.application.mapper;
 
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import transfer.banking.server.domain.account.application.mapper.AccountMapper;
 import transfer.banking.server.domain.account.domain.AccountDomain;
-import transfer.banking.server.domain.trasaction.entity.Transaction;
+import transfer.banking.server.domain.trasaction.adapter.out.persistence.entity.Transaction;
+import transfer.banking.server.domain.trasaction.domain.TransactionDomain;
 
 @Component
 @RequiredArgsConstructor
@@ -32,6 +33,17 @@ public class TransactionMapper {
         .amount(transferAmount)
         .senderLeftBalance(senderLeftBalance)
         .receiverLeftBalance(receiverLeftBalance)
+        .build();
+  }
+
+  public TransactionDomain toDomain(Transaction transaction) {
+    return TransactionDomain.builder()
+        .sender(accountMapper.toDomain(transaction.getSender()))
+        .receiver(accountMapper.toDomain(transaction.getReceiver()))
+        .amount(transaction.getAmount())
+        .senderLeftBalance(transaction.getSenderLeftBalance())
+        .receiverLeftBalance(transaction.getReceiverLeftBalance())
+        .transactionDate(transaction.getCreatedAt())
         .build();
   }
 }

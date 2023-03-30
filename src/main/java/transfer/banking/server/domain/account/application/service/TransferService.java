@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
-import transfer.banking.server.domain.trasaction.TransactionService;
+import transfer.banking.server.domain.trasaction.application.service.TransactionService;
 
 /**
  * 계좌 이체 트랜잭션 서비스
