@@ -39,11 +39,21 @@ public class AccountDomain {
     }
   }
 
+  /**
+   * 계좌에서 금액을 출금한다.
+   *
+   * @param transferAmount 출금하고자 하는 금액
+   */
   public void withdraw(BigDecimal transferAmount) {
     this.checkIfEnoughBalance(transferAmount);
     this.balance = this.balance.subtract(transferAmount);
   }
 
+  /**
+   * 계좌에 금액을 입금한다.
+   *
+   * @param transferAmount 입금하고자 하는 금액
+   */
   public void deposit(BigDecimal transferAmount) {
     this.balance = this.balance.add(transferAmount);
   }
