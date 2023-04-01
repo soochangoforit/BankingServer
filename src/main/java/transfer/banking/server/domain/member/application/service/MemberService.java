@@ -94,6 +94,7 @@ public class MemberService {
      return memberRepository.findByIds(myFriendIds);
   }
 
+  @Transactional(readOnly = true)
   public MemberDomain findMemberByNameAndNumber(String friendName, String friendPhoneNumber) {
     return memberRepository.findByNameAndPhoneNumber(friendName, friendPhoneNumber)
         .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
