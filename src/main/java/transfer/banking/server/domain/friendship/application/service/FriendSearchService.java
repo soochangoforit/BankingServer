@@ -10,7 +10,7 @@ import transfer.banking.server.domain.member.application.service.MemberService;
 import transfer.banking.server.domain.member.domain.MemberDomain;
 
 /**
- * 친구 계좌 조회 복합 서비스
+ * 친구 조회 복합 서비스
  */
 @Service
 @RequiredArgsConstructor
