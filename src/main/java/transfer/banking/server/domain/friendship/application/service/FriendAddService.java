@@ -7,7 +7,6 @@ import transfer.banking.server.domain.friendship.adapter.in.web.dto.request.Frie
 import transfer.banking.server.domain.friendship.application.port.in.FriendAddUseCase;
 import transfer.banking.server.domain.member.application.service.MemberService;
 import transfer.banking.server.domain.member.domain.MemberDomain;
-import transfer.banking.server.domain.memberaccount.service.MemberAccountService;
 
 /**
  * 친구 추가 복합 서비스
@@ -18,7 +17,6 @@ import transfer.banking.server.domain.memberaccount.service.MemberAccountService
 public class FriendAddService implements FriendAddUseCase {
 
   private final FriendShipService friendShipService;
-  private final MemberAccountService memberAccountService;
   private final MemberService memberService;
 
   /**
