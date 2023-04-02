@@ -18,6 +18,13 @@ public class TransactionService {
 
   private final TransactionRepositoryPort transactionRepository;
 
+  /**
+   * 계좌 이체 내역 저장
+   *
+   * @param myAccount 이체를 요청한 내 계좌 도메인 객체
+   * @param friendAccount 이체를 받는 친구 계좌 도메인 객체
+   * @param transferAmount 이체 금액
+   */
   @Transactional
   public void saveTransactionRecord(AccountDomain myAccount, AccountDomain friendAccount,
       BigDecimal transferAmount) {
