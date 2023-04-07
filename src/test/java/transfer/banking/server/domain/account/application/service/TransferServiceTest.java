@@ -1,8 +1,10 @@
 package transfer.banking.server.domain.account.application.service;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import transfer.banking.server.domain.account.adapter.out.persistence.entity.Bank;
+import transfer.banking.server.domain.account.application.exception.NotEnoughBalanceException;
 import transfer.banking.server.domain.account.domain.AccountDomain;
 import transfer.banking.server.domain.friendship.domain.MemberAccountDomain;
 import transfer.banking.server.domain.trasaction.application.service.TransactionService;
@@ -448,6 +451,88 @@ class TransferServiceTest {
 
     // B 계좌는 A 계좌로부터 100원을 받고, A 계좌로 100원을 이체하기에 원상태 그대로 유지
     assertEquals(fromAccountInitialBalance_B, fromAccountFinalBalance_B);
+
+  }
+
+
+  @Test
+  void 계좌_잔금이_부족한_경우_트랜잭션_롤백_처리_확인 () throws InterruptedException {
+
+    // from Account A
+    Bank fromAccountBank_A = Bank.NH;
+    String fromAccountNumber_A = "111111111";
+
+    // to Account A
+    MemberAccountDomain toAccountDomain_A = MemberAccountDomain.builder()
+        .account(AccountDomain.builder().bank(fromAccountBank_A).accountNumber(fromAccountNumber_A)
+            .build())
+        .build();
+
+    // from Account B
+    Bank fromAccountBank_B = Bank.NH;
+    String fromAccountNumber_B = "222222222";
+
+    // to Account B
+    MemberAccountDomain toAccountDomain_B = MemberAccountDomain.builder()
+        .account(AccountDomain.builder().bank(fromAccountBank_B).accountNumber(fromAccountNumber_B)
+            .build())
+        .build();
+
+
+    // when
+    ExecutorService executorService = Executors.newFixedThreadPool(32);
+    CountDownLatch latch = new CountDownLatch(THREAD_COUNT * 2);
+    ConcurrentLinkedQueue<Throwable> exceptions = new ConcurrentLinkedQueue<>();
+
+    for (int i = 0; i < THREAD_COUNT; i++) {
+      // Task 1: B 계좌에서 A 계좌로 10원을 전송합니다.
+      executorService.submit(() -> {
+        try {
+          transferService.transfer(fromAccountBank_B, fromAccountNumber_B,
+              toAccountDomain_A, new BigDecimal("10.00"));
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          latch.countDown();
+        }
+      });
+
+      // Task 2: A 계좌에서 B 계좌로 40000원을 전송합니다.
+      executorService.submit(() -> {
+        try {
+          transferService.transfer(fromAccountBank_A, fromAccountNumber_A,
+              toAccountDomain_B, new BigDecimal("40000.00"));
+        } catch (NotEnoughBalanceException e) {
+          exceptions.add(e);
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          latch.countDown();
+        }
+      });
+    }
+
+    latch.await();
+
+    // A 계좌는 10번 계좌 이체를 시도하더라도 잔약이 부족하기에 2번만 성공 후, 8번은 실패
+    assertThat(exceptions).hasSize(8);
+    exceptions.forEach(e -> assertThat(e).isInstanceOf(NotEnoughBalanceException.class));
+
+    // 10번의 계좌 이체 시도 끝, 2개의 계좌 예상 잔액
+    // A 계좌는 10번 계좌 이체를 시도하더라도 잔약이 부족하기에 2번만 성공 후, 8번은 실패
+    // B 계좌는 10번 계좌 이체를 시도하더라도 충분한 잔액이 있기에 10번 모두 성공 => 그래서 A 계좌는 B 계좌로부터 100원 받음
+    BigDecimal expectedBalanceA = new BigDecimal("20100.00");
+    BigDecimal expectedBalanceB = new BigDecimal("179900.00");
+
+    BigDecimal finalBalanceA = accountService.findAccountByBankAndNumber(
+        fromAccountBank_A, fromAccountNumber_A).getBalance();
+
+    BigDecimal finalBalanceB = accountService.findAccountByBankAndNumber(
+        fromAccountBank_B, fromAccountNumber_B).getBalance();
+
+    // 잔액 검증
+    assertThat(finalBalanceA).isEqualTo(expectedBalanceA);
+    assertThat(finalBalanceB).isEqualTo(expectedBalanceB);
 
   }
 
