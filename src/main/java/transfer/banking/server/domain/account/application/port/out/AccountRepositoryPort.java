@@ -16,4 +16,6 @@ public interface AccountRepositoryPort {
   Optional<AccountDomain> findAccountByBankAndNumber(Bank accountBank, String accountNumber);
 
   Optional<AccountDomain> findAccountByBankAndNumberWithLock(Bank bank, String accountNumber);
+
+  void deleteAll();
 }

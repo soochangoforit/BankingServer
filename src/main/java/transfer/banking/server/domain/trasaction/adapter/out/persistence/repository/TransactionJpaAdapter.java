@@ -42,4 +42,10 @@ public class TransactionJpaAdapter implements TransactionRepositoryPort {
         .map(transactionMapper::toDomain).collect(
             Collectors.toList());
   }
+
+  @Override
+  public void deleteAll() {
+    log.info("모든 계좌 이체 내역을 삭제합니다.");
+    transactionRepository.deleteAll();
+  }
 }

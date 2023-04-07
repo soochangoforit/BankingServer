@@ -10,4 +10,7 @@ public interface TransactionRepositoryPort {
   void save(AccountDomain myAccount, AccountDomain friendAccount, BigDecimal transferAmount, BigDecimal senderLeftBalance, BigDecimal receiverLeftBalance);
 
   List<TransactionDomain> findAllByAccount(AccountDomain accountDomain);
+
+  void deleteAll();
+
 }

@@ -90,4 +90,8 @@ public class AccountService {
     return accountRepository.findAccountByBankAndNumberWithLock(bank, accountNumber)
         .orElseThrow(() -> new NotFoundAccountException(ACCOUNT_NOT_FOUND));
   }
+
+  public void deleteAll() {
+    accountRepository.deleteAll();
+  }
 }
