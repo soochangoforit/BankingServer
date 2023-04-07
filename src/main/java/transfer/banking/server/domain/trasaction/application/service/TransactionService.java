@@ -45,4 +45,8 @@ public class TransactionService {
   public List<TransactionDomain> getAllTransactionHistory(AccountDomain accountDomain) {
     return transactionRepository.findAllByAccount(accountDomain);
   }
+
+  public void deleteAll() {
+    transactionRepository.deleteAll();
+  }
 }

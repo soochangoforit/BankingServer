@@ -49,4 +49,10 @@ public class AccountRepositoryJpaAdapter implements AccountRepositoryPort {
     return accountRepository.findAccountIdByBankAndNumberWithLock(bank, accountNumber)
         .map(accountMapper::toDomain);
   }
+
+  @Override
+  public void deleteAll() {
+    log.info("모든 계좌를 삭제합니다.");
+    accountRepository.deleteAll();
+  }
 }
