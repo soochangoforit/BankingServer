@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Builder;
@@ -31,7 +32,10 @@ import transfer.banking.server.domain.common.BaseTimeEntity;
         @Parameter(name = "increment_size", value = "1")
     }
 )
-@Table(name = "accounts")
+@Table(
+    name = "accounts",
+    indexes = @Index(name = "idx_bank_account_number", columnList = "bank, account_number", unique = true)
+)
 public class Account extends BaseTimeEntity {
 
   /**
@@ -44,7 +48,7 @@ public class Account extends BaseTimeEntity {
   /**
    * 계좌의 고유 번호
    */
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false, unique = true, name = "account_number")
   private String accountNumber;
 
   /**
